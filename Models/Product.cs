@@ -25,15 +25,18 @@ namespace LaptopCenter.Models
         public bool IsSale { get; set; }
         [Required]
         public int Quantity { get; set; }
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Price { get; set; }
 
-        [StringLength(100, ErrorMessage = "Processor cannot exceed 100 characters.")]
-        public string Processor { get; set; }
+        [StringLength(100, ErrorMessage = "CPU cannot exceed 100 characters.")]
+        public string CPU { get; set; }
 
         [StringLength(50, ErrorMessage = "RAM cannot exceed 50 characters.")]
         public string RAM { get; set; }
 
         [StringLength(100, ErrorMessage = "Storage cannot exceed 100 characters.")]
-        public string Storage { get; set; }
+        public string GraphicsCard { get; set; }
 
         [StringLength(50, ErrorMessage = "Screen Size cannot exceed 50 characters.")]
         public string ScreenSize { get; set; }

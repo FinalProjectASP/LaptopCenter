@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LaptopCenter.Constraints;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LaptopCenter.Models
@@ -18,9 +19,10 @@ namespace LaptopCenter.Models
         [Required]
         public string CustomerPhone { get; set; }
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Total { get; set; }
         [Required]
-        public Boolean IsConfirm { get; set; }
+        public EStatus Status { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
     }
 }
