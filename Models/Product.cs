@@ -44,6 +44,16 @@ namespace LaptopCenter.Models
         [StringLength(50, ErrorMessage = "Warranty Period cannot exceed 50 characters.")]
         public string WarrantyPeriod { get; set; }
 
+        public DateTime CreateAt { get; set; }
+
+        public virtual int SupplierId { get; set; }
+        [ForeignKey("SupplierId")]
+        public virtual Supplier? Supplier { get; set; }
+
+        public virtual int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public virtual Category? Category { get; set; }
+
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
         public virtual ICollection<Review>? Reviews { get; set; }
     }

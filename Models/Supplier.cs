@@ -8,9 +8,13 @@ namespace LaptopCenter.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SupplierId { get; set; }
 
+
+        [Display(Name = "Supplier Name")]
         [StringLength(100, ErrorMessage = "Supplier Name cannot exceed 100 characters.")]
         public string SupplierName { get; set; }
 
+
+        [Display(Name = "Supplier Logo URL")]
         [Required(ErrorMessage = "Logo URL is required.")]
         public string? LogoUrl{ get; set; }
 

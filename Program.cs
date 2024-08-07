@@ -1,4 +1,5 @@
 using LaptopCenter.Data;
+using LaptopCenter.Repositories;
 using LaptopCenter.Repositories.Interfaces;
 using LaptopCenter.Repository;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDBContextConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

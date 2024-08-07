@@ -1,0 +1,161 @@
+﻿@model LaptopCenter.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container text-center mt-5">
+    <h1>Create Product</h1>
+    <h4>Product Details</h4>
+</div>
+
+<hr />
+
+<div class="container row mx-auto">
+    <div class="col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <!-- ProductName -->
+            <div class="row mb-3">
+                <label asp-for="ProductName" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="ProductName" class="form-control" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- ShortDescription -->
+            <div class="row mb-3">
+                <label asp-for="ShortDescription" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="ShortDescription" class="form-control" />
+                    <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- DetailDescription -->
+            <div class="row mb-3">
+                <label asp-for="DetailDescription" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <textarea asp-for="DetailDescription" class="form-control"></textarea>
+                    <span asp-validation-for="DetailDescription" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="row mb-3">
+                <label asp-for="ImageFile" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="ImageFile" type="file" class="form-control" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- IsSale -->
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label asp-for="IsSale" class="form-check-label"></label>
+                </div>
+                <div class="col-sm-9">
+                    <input asp-for="IsSale" class="form-check-input" />
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="row mb-3">
+                <label asp-for="Quantity" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="row mb-3">
+                <label asp-for="Price" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- CPU -->
+            <div class="row mb-3">
+                <label asp-for="CPU" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="CPU" class="form-control" />
+                    <span asp-validation-for="CPU" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- RAM -->
+            <div class="row mb-3">
+                <label asp-for="RAM" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="RAM" class="form-control" />
+                    <span asp-validation-for="RAM" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- GraphicsCard -->
+            <div class="row mb-3">
+                <label asp-for="GraphicsCard" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="GraphicsCard" class="form-control" />
+                    <span asp-validation-for="GraphicsCard" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- ScreenSize -->
+            <div class="row mb-3">
+                <label asp-for="ScreenSize" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="ScreenSize" class="form-control" />
+                    <span asp-validation-for="ScreenSize" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- WarrantyPeriod -->
+            <div class="row mb-3">
+                <label asp-for="WarrantyPeriod" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <input asp-for="WarrantyPeriod" class="form-control" />
+                    <span asp-validation-for="WarrantyPeriod" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- SupplierId -->
+            <div class="row mb-3">
+                <label asp-for="SupplierId" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="SupplierId" class="form-select" asp-items="ViewBag.Suppliers"></select>
+                </div>
+            </div>
+
+            <!-- CategoryId -->
+            <div class="row mb-3">
+                <label asp-for="CategoryId" class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.Categories"></select>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

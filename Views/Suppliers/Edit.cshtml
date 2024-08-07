@@ -1,0 +1,51 @@
+﻿@model LaptopCenter.Models.Supplier
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Edit Supplier</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h4 class="mb-0">Edit Supplier Details</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <input type="hidden" asp-for="SupplierId" />
+
+                <div class="mb-3">
+                    <label asp-for="SupplierName" class="form-label"></label>
+                    <input asp-for="SupplierName" class="form-control" />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.SupplierName)
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LogoUrl" class="form-label"></label>
+                    <input asp-for="LogoUrl" class="form-control" />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.LogoUrl)
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

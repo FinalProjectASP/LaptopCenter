@@ -1,190 +1,69 @@
 ﻿@{
     ViewData["Title"] = "Product";
 }
-@model List<Product>
-
+@model IEnumerable<LaptopCenter.DTO.ProductsDTO>
 
 <div class="container-xl">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="product-title"><b>Best Salers</b></h2>
+            <h2 class="product-title">All <b>Products</b></h2>
             <div class="row">
-                <div class="col-6 col-md-3">
-                    <div class="product-card">
-                        <div class="logo-cart">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <img src="~/img/suppliers/laptop-accer.png" alt="logo">
-                                <i class='bx bx-shopping-bag'></i>
-                            </a>
+                 @if (Model != null && Model.Any())
+                 {
+                    foreach (var product in Model)
+                    {
+                        <div class="col-6 col-md-3 pb-4">
+                            <div class="product-card">
+                                <div class="logo-cart">
+                                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                        <img src="~/img/suppliers/@product.Supplier?.LogoUrl" alt="logo">
+                                        <i class='bx bx-shopping-bag'></i>
+                                    </a>
 
-                        </div>
-                        <a asp-controller="Home" asp-action="ProductDetail">
-                            <div class="main-images">
-                                <img id="blue" class="blue active" src="~/img/products/laptop-accer.png" alt="blue">
-                            </div>
-                        </a>
+                                </div>
+                                <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                    <div class="main-images">
+                                        <img id="blue" class="blue active" src="~/img/products/@product.ProductImage" alt="blue">
+                                    </div>
+                                </a>
 
-                        <div class="shoe-details">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                            </a>
+                                <div class="shoe-details">
+                                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                        <span class="shoe_name">@product.ProductName</span>
+                                        <p>@product.ShortDescription</p>
+                                    </a>
 
-                        </div>
-                        <div class="color-price row">
-                            <div class="color-option">
-                                <span class="color">Rate:</span>
-                                <div class="stars">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                                <div class="color-price">
+                                    <div class="color-option">
+                                        <span class="color">Rate:</span>
+                                        <div class="stars">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="price">
+                                        <span class="price_num">$@product.Price</span>
+                                        <span class="price_letter">Nine dollar only</span>
+                                    </div>
+                                </div>
+                                <div class="button">
+                                    <div class="button-layer"></div>
+                                    <button>Add To Cart</button>
                                 </div>
                             </div>
-                            <div class="price">
-                                <span class="price_num">$09.00</span>
-                                <span class="price_letter">Nine dollar only</span>
-                            </div>
                         </div>
-                        <div class="button">
-                            <div class="button-layer"></div>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="product-card">
-                        <div class="logo-cart">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <img src="~/img/suppliers/laptop-hp.png" alt="logo">
-                                <i class='bx bx-shopping-bag'></i>
-                            </a>
-
-                        </div>
-                        <a asp-controller="Home" asp-action="ProductDetail">
-                            <div class="main-images">
-                                <img id="blue" class="blue active" src="~/img/products/laptop-hp.jpg" alt="blue">
-                            </div>
-                        </a>
-
-                        <div class="shoe-details">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                            </a>
-
-                        </div>
-                        <div class="color-price">
-                            <div class="color-option">
-                                <span class="color">Rate:</span>
-                                <div class="stars">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="price">
-                                <span class="price_num">$09.00</span>
-                                <span class="price_letter">Nine dollar only</span>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <div class="button-layer"></div>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="product-card">
-                        <div class="logo-cart">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <img src="~/img/suppliers/laptop-microsoft.png" alt="logo">
-                                <i class='bx bx-shopping-bag'></i>
-                            </a>
-
-                        </div>
-                        <a asp-controller="Home" asp-action="ProductDetail">
-                            <div class="main-images">
-                                <img id="blue" class="blue active" src="~/img/products/laptop-microsoft.png" alt="blue">
-                            </div>
-                        </a>
-
-                        <div class="shoe-details">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                            </a>
-
-                        </div>
-                        <div class="color-price">
-                            <div class="color-option">
-                                <span class="color">Rate:</span>
-                                <div class="stars">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="price">
-                                <span class="price_num">$09.00</span>
-                                <span class="price_letter">Nine dollar only</span>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <div class="button-layer"></div>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="product-card">
-                        <div class="logo-cart">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <img src="~/img/suppliers/laptop-msi.jpg" alt="logo">
-                                <i class='bx bx-shopping-bag'></i>
-                            </a>
-
-                        </div>
-                        <a asp-controller="Home" asp-action="ProductDetail">
-                            <div class="main-images">
-                                <img id="blue" class="blue active" src="~/img/products/laptop-msi.jpg" alt="blue">
-                            </div>
-                        </a>
-
-                        <div class="shoe-details">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                            </a>
-
-                        </div>
-                        <div class="color-price">
-                            <div class="color-option">
-                                <span class="color">Rate:</span>
-                                <div class="stars">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="price">
-                                <span class="price_num">$09.00</span>
-                                <span class="price_letter">Nine dollar only</span>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <div class="button-layer"></div>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                </div>
+                            }
+                        }
+                else
+                {
+                    <tr>
+                        <td colspan="5">No products available</td>
+                    </tr>
+                }
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
 <!-- Carousel Start -->
 <div id="carouselExampleCaptions" class="carousel slide p-0 mb-0" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -34,126 +35,50 @@
 <div class="container">
     <h2 class="product-title pt-5">New products</h2>
     <div class="wrapper m-auto">
-        <div class="card">
-            <img src="~/img/products/laptop-accer.png" alt="" class="product_img">
-            <div class="accordion-container">
-                <div class="card-body pt-0">
-                    <h4 class="Specification-title mb-0">Specifications</h4>
-                    <hr class="hr-1">
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label for="card-name" class="small-text text-muted mb-1">RAM</label>
-                            <input type="text" class="form-control form-control-sm" name="card-name" id="card-name" aria-describedby="helpId" readonly placeholder="8 GB">
+        @if (ViewBag.LatestProducts != null && ViewBag.LatestProducts.Count > 0)
+        {
+            foreach (var product in ViewBag.LatestProducts)
+            {
+
+                <div class="card">
+                            <img src="~/img/products/@product.ProductImage" alt="" class="product_img">
+                    <div class="accordion-container">
+                        <div class="card-body pt-0">
+                            <h4 class="Specification-title mb-0">Specifications</h4>
+                            <hr class="hr-1">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="card-name" class="small-text text-muted mb-1">RAM</label>
+                                    <input type="text" class="form-control form-control-sm" name="card-name" id="card-name" aria-describedby="helpId" readonly placeholder="8 GB">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="card-number" class="small-text text-muted mb-1">CPU</label>
+                                    <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Core i3">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="card-number" class="small-text text-muted mb-1">Graphics Card</label>
+                                    <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Intel UHD Graphics">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="card-number" class="small-text text-muted mb-1">ScreenSize</label>
+                                    <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="16.0 inch">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">CPU</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Core i3">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">Graphics Card</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Intel UHD Graphics">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">ScreenSize</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="16.0 inch">
+                        <div class="buttons-wrapper">
+                            <div><a class="click-btn btn-style1" asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">See detail</a></div>
                         </div>
                     </div>
                 </div>
-                <div class="buttons-wrapper">
-                    <div><a class="click-btn btn-style1" asp-controller="Home" asp-action="ProductDeail">See detail</a></div>
-                </div>
+            }
+        }
+        else
+        {
+            <div class="card">
+                <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
+                <p class="pb-3" colspan="5">No products here!</p>
             </div>
-        </div>
-        <div class="card">
-            <img src="~/img/products/laptop-hp.jpg" alt="" class="product_img">
-            <div class="accordion-container">
-                <div class="card-body pt-0">
-                        <h4 class="Specification-title mb-0">Specifications</h4>
-                        <hr class="hr-1">
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <label for="card-name" class="small-text text-muted mb-1">RAM</label>
-                                <input type="text" class="form-control form-control-sm" name="card-name" id="card-name" aria-describedby="helpId" readonly placeholder="8 GB">
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="card-number" class="small-text text-muted mb-1">CPU</label>
-                                <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Core i3">
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="card-number" class="small-text text-muted mb-1">Graphics Card</label>
-                                <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Intel UHD Graphics">
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="card-number" class="small-text text-muted mb-1">ScreenSize</label>
-                                <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="16.0 inch">
-                            </div>
-                        </div>                        
-                    </div>
-                <div class="buttons-wrapper">
-                    <div><a class="click-btn btn-style1" asp-controller="Home" asp-action="ProductDeail">See detail</a></div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <img src="~/img/products/laptop-microsoft.png" alt="" class="product_img">
-            <div class="accordion-container pt-4">
-                <div class="card-body pt-0">
-                    <h4 class="Specification-title mb-0">Specifications</h4>
-                    <hr class="hr-1">
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label for="card-name" class="small-text text-muted mb-1">RAM</label>
-                            <input type="text" class="form-control form-control-sm" name="card-name" id="card-name" aria-describedby="helpId" readonly placeholder="8 GB">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">CPU</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Core i3">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">Graphics Card</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Intel UHD Graphics">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">ScreenSize</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="16.0 inch">
-                        </div>
-                    </div>
-                </div>
-                <div class="buttons-wrapper">
-                    <div><a class="click-btn btn-style1" asp-controller="Home" asp-action="ProductDeail">See detail</a></div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <img src="~/img/products/laptop-msi.jpg" alt="" class="product_img">
-            <div class="accordion-container">
-                <div class="card-body pt-0">
-                    <h4 class="Specification-title mb-0">Specifications</h4>
-                    <hr class="hr-1">
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label for="card-name" class="small-text text-muted mb-1">RAM</label>
-                            <input type="text" class="form-control form-control-sm" name="card-name" id="card-name" aria-describedby="helpId" readonly placeholder="8 GB">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">CPU</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Core i3">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">Graphics Card</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Intel UHD Graphics">
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="card-number" class="small-text text-muted mb-1">ScreenSize</label>
-                            <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="16.0 inch">
-                        </div>
-                    </div>
-                </div>
-                <div class="buttons-wrapper">
-                    <div><a class="click-btn btn-style1" asp-controller="Home" asp-action="ProductDeail">See detail</a></div>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
 
@@ -163,182 +88,64 @@
         <div class="col-md-12">
             <h2 class="product-title"><b>Best Salers</b></h2>
             <div class="row">
-                <div class="col-6 col-md-3">
-                    <div class="product-card">
-                        <div class="logo-cart">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <img src="~/img/suppliers/laptop-accer.png" alt="logo">
-                                <i class='bx bx-shopping-bag'></i>
-                            </a>
+                @if (ViewBag.LatestProducts != null && ViewBag.LatestProducts.Count > 0)
+                {
+                    foreach (var product in ViewBag.TopSellingProducts)
+                    {
+                        <div class="col-6 col-md-3">
+                            <div class="product-card">
+                                <div class="logo-cart">
+                                    <a asp-controller="Home" asp-action="ProductDetail">
+                                        <img src="~/img/suppliers/@product.SupplierLogoUrl" alt="logo">
+                                        <i class='bx bx-shopping-bag'></i>
+                                    </a>
 
-                        </div>
-                        <a asp-controller="Home" asp-action="ProductDetail">
-                            <div class="main-images">
-                                <img id="blue" class="blue active" src="~/img/products/laptop-accer.png" alt="blue">
-                            </div>
-                        </a>
+                                </div>
+                                <a asp-controller="Home" asp-action="ProductDetail">
+                                    <div class="main-images">
+                                        <img id="blue" class="blue active" src="~/img/products/@product.ProductImage" alt="blue">
+                                    </div>
+                                </a>
 
-                        <div class="shoe-details">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                            </a>
+                                <div class="shoe-details">
+                                    <a asp-controller="Home" asp-action="ProductDetail">
+                                        <span class="shoe_name">@product.ProductName</span>
+                                        <p>@product.ShortDescription</p>
+                                    </a>
 
-                        </div>
-                        <div class="color-price row">
-                            <div class="color-option">
-                                <span class="color">Rate:</span>
-                                <div class="stars">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                                <div class="color-price row">
+                                    <div class="color-option">
+                                        <span class="color">Rate:</span>
+                                        <div class="stars">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="price">
+                                        <span class="price_num">$@product.Price</span>
+                                        <span class="price_letter">Nine dollar only</span>
+                                    </div>
+                                </div>
+                                <div class="button">
+                                    <div class="button-layer"></div>
+                                    <button asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">Add To Cart</button>
                                 </div>
                             </div>
-                            <div class="price">
-                                <span class="price_num">$09.00</span>
-                                <span class="price_letter">Nine dollar only</span>
-                            </div>
                         </div>
-                        <div class="button">
-                            <div class="button-layer"></div>
-                            <button>Add To Cart</button>
-                        </div>
+
+                    }
+                }
+                else
+                {
+                    <div class="card">
+                        <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
+                        <p class="pb-3" colspan="5">No products here!</p>
                     </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="product-card">
-                        <div class="logo-cart">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <img src="~/img/suppliers/laptop-hp.png" alt="logo">
-                                <i class='bx bx-shopping-bag'></i>
-                            </a>
-
-                        </div>
-                        <a asp-controller="Home" asp-action="ProductDetail">
-                            <div class="main-images">
-                                <img id="blue" class="blue active" src="~/img/products/laptop-hp.jpg" alt="blue">
-                            </div>
-                        </a>
-
-                        <div class="shoe-details">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                            </a>
-
-                        </div>
-                        <div class="color-price">
-                            <div class="color-option">
-                                <span class="color">Rate:</span>
-                                <div class="stars">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="price">
-                                <span class="price_num">$09.00</span>
-                                <span class="price_letter">Nine dollar only</span>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <div class="button-layer"></div>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="product-card">
-                        <div class="logo-cart">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-								<img src="~/img/suppliers/laptop-microsoft.png" alt="logo">
-                                <i class='bx bx-shopping-bag'></i>
-                            </a>
-
-                        </div>
-                        <a asp-controller="Home" asp-action="ProductDetail">
-                            <div class="main-images">
-                                <img id="blue" class="blue active" src="~/img/products/laptop-microsoft.png" alt="blue">
-                            </div>
-                        </a>
-
-                        <div class="shoe-details">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                            </a>
-
-                        </div>
-                        <div class="color-price">
-                            <div class="color-option">
-                                <span class="color">Rate:</span>
-                                <div class="stars">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="price">
-                                <span class="price_num">$09.00</span>
-                                <span class="price_letter">Nine dollar only</span>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <div class="button-layer"></div>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="product-card">
-                        <div class="logo-cart">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <img src="~/img/suppliers/laptop-msi.jpg" alt="logo">
-                                <i class='bx bx-shopping-bag'></i>
-                            </a>
-
-                        </div>
-                        <a asp-controller="Home" asp-action="ProductDetail">
-                            <div class="main-images">
-                                <img id="blue" class="blue active" src="~/img/products/laptop-msi.jpg" alt="blue">
-                            </div>
-                        </a>
-
-                        <div class="shoe-details">
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                            </a>
-
-                        </div>
-                        <div class="color-price">
-                            <div class="color-option">
-                                <span class="color">Rate:</span>
-                                <div class="stars">
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="price">
-                                <span class="price_num">$09.00</span>
-                                <span class="price_letter">Nine dollar only</span>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <div class="button-layer"></div>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
