@@ -1,92 +1,203 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
- <div class="cart_section">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 offset-lg-1 ms-2">
-                        <div class="cart_container">
-                            <div class="cart_title">Shopping Cart<small> (1 item
-                                    in your cart) </small></div>
-                            <div class="cart_items">
-                                <ul class="cart_list">
-                                    <li class="cart_item clearfix">
-                                        <div class="cart_item_image">
-                                            <img src="https://i.imgur.com/qqBRWD5.jpg" alt="">
-                                        </div>
-                                        <div
-                                            class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                            <div
-                                                class="cart_item_name cart_info_col">
-                                                <div
-                                                    class="cart_item_title">Name</div>
-                                                <div
-                                                    class="cart_item_text cart_name">Samsung
-                                                    C7 Pro</div>
-                                            </div>
-                                            <div
-                                                class="cart_item_color cart_info_col">
-                                                <div
-                                                    class="cart_item_title cart-color">Color</div>
-                                                <div
-                                                    class="cart_item_text"><span
-                                                        style="background-color:#999999;"></span>Silver</div>
-                                            </div>
-                                            <div
-                                                class="cart_item_price cart_info_col">
-                                                <div
-                                                    class="cart_item_title">Price</div>
-                                                <div class="cart_item_text cart_price">
-                                            $22.00
-                                        </div>
-                                            </div>
-                                            <div class="cart_item_quantity cart_info_col">
-                                                <div class="cart_item_title" id="cart_item_title">
-                                                    Quantity
-                                                </div>
-                                                <div class="d-flex flex-row align-self-center product_data" id="qty_select">
-                                                    <input type="hidden" value=" 1 " class="prod_id">
-                                                    <div class="input-group text-center" id="qty_selector">
-                                                        <a class="decrement-btn">
-                                                            <i class="fa fa-minus" style="padding-left:9px"></i>
-                                                        </a>
-                                                        <input type="text" readonly="readonly" id="qty_display" class="qty-input text-center" value="1" />
-                                                        <a class="increment-btn">
-                                                            <i class="fa fa-plus"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    <div class="cart_item_color cart_info_col">
-                                        <div class="cart_item_title">
-                                            Remove
-                                        </div>
-                                        <a class="remove_icon"> 
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </a>
+﻿@model IEnumerable<LaptopCenter.Models.Cart>
+
+<div class="cart_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 offset-lg-1 ms-2">
+                <div class="cart_container">
+                    <div class="cart_title">
+                        Shopping Cart
+                        <small> (@Model.Count() item(s) in your cart) </small>
+                    </div>
+                    <div class="cart_items">
+                        <ul class="cart_list">
+                            @foreach (var item in Model)
+                            {
+                                <li class="cart_item clearfix" data-product-id="@item.ProductId">
+                                    <div class="cart_item_image">
+                                        <img src="~/img/products/@item.Product.Image" alt="Product Image">
                                     </div>
+                                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+
+                                        @{
+                                            int maxNameLength = 30; // Đặt độ dài tối đa cho tên sản phẩm
+
+                                            string truncatedName = item.Product.ProductName.Length > maxNameLength
+                                            ? item.Product.ProductName.Substring(0, maxNameLength) + "..."
+                                            : item.Product.ProductName;
+                                        }
+
+                                        <div class="cart_item_name cart_info_col">
+                                            <div class="cart_item_title">Name</div>
+                                            <div class="cart_item_text cart_name">@truncatedName</div>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="order_total">
-                                <div class="order_total_content text-md-right">
-                                    <div class="order_total_title">Order
-                                        Total:</div>
-                                    <div class="order_total_amount">$22.00</div>
-                                </div>
-                            </div>
-                            <div class="cart_buttons"> 
-                                <a asp-action="Product" asp-controller="Home" type="button"
-                                    class="button cart_button_clear">Continue
-                                    Shopping</a> 
-                                    <a asp-action="CheckOut" asp-controller="Home"
-                                    class="button cart_button_checkout">Check out</a>
+                                        <div class="cart_item_price cart_info_col">
+                                            <div class="cart_item_title">Price</div>
+                                            <div class="cart_item_text cart_price">$@item.Product.Price</div>
+                                        </div>
+                                        <div class="cart_item_quantity cart_info_col">
+                                            <div class="cart_item_title" id="cart_item_title">Quantity</div>
+                                            <div class="d-flex flex-row align-self-center product_data" id="qty_select">
+                                                <a class="decrement-btn">
+                                                    <i class="fa fa-minus" style="padding-left:9px"></i>
+                                                </a>
+                                                <input type="hidden" readonly="readonly" id="prod_id" class="prod_id" value="@item.ProductId" />
+                                                <input type="text" readonly="readonly" id="qty_display" class="qty-input text-center" value="@item.Quantity" />
+                                                <a class="increment-btn">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="cart_item_color cart_info_col">
+                                            <button class="noselect" id="confirm_delete">
+                                                <span class='text'>Remove</span>
+                                                <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" /></svg></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="order_total">
+                        <div class="order_total_content text-md-right">
+                            <div class="order_total_title">Order Total:</div>
+                            <div class="order_total_amount">
+                                $@Model.Sum(x => x.Product.Price * x.Quantity)
                             </div>
                         </div>
+                    </div>
+                    <div class="cart_buttons">
+                        <a asp-action="Product" asp-controller="Home" type="button" class="button cart_button_clear">Continue Shopping</a>
+                        <form asp-action="CheckOut" asp-controller="Home" method="post" class="d-inline">
+                            <button type="submit" class="button cart_button_checkout">Check out</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#confirm_delete').click(function (e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: "Are you sure to delete?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var prodId = parseInt($('#prod_id').val(), 10); // Ensure parsing as integer
+
+                        $.ajax({
+                            url: '@Url.Action("RemoveFromCart", "Home")',
+                            type: 'POST',
+                            data: {
+                                productId: prodId,
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Deleted!',
+                                        text: 'Product deleted successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then(() => {
+                                        // Optionally, you can reload the page or remove the item from the DOM
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error!',
+                                        text: response.message,
+                                        showConfirmButton: true
+                                    });
+                                }
+                            },
+                            error: function () {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Something went wrong!',
+                                    showConfirmButton: true
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+
+            $('.increment-btn').click(function (e) {
+                e.preventDefault();
+                var prodIdInput = $(this).closest('.product_data').find('.prod_id');
+                var qtyInput = $(this).closest('.product_data').find('.qty-input');
+                var quantity = parseInt(qtyInput.val());
+                var prodId = parseInt(prodIdInput.val());
+
+                if (quantity < 10) { // Adjust max limit as needed
+                    quantity++;
+                    qtyInput.val(quantity);
+
+                    updateCartQuantity(prodId, quantity);
+                }
+            });
+
+            $('.decrement-btn').click(function (e) {
+                e.preventDefault();
+                var prodIdInput = $(this).closest('.product_data').find('.prod_id');
+                var qtyInput = $(this).closest('.product_data').find('.qty-input');
+                var quantity = parseInt(qtyInput.val());
+                var prodId = parseInt(prodIdInput.val());
+
+                if (quantity > 1) {
+                    quantity--;
+                    qtyInput.val(quantity);
+
+                    updateCartQuantity(prodId, quantity);
+                }
+            });
+
+            function updateCartQuantity(productId, quantity) {
+                $.ajax({
+                    url: '@Url.Action("UpdateCartQuantity", "Home")',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        quantity: quantity
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: response.message,
+                                showConfirmButton: true
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            showConfirmButton: true
+                        });
+                    }
+                });
+            }
+        });
+
+    </script>
+}

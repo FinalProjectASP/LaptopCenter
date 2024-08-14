@@ -262,7 +262,7 @@ namespace LaptopCenter.Repository
             try
             {
                 var currentDate = DateTime.Now;
-                var orderStatus = EStatus.Confirmed; // Trạng thái cố định
+                var orderStatus = EStatus.Completed; // Trạng thái cố định
 
                 var topSellingProducts = await _context.OrderDetails
                 .Where(od => od.Order.DeliveryDate.Year == currentDate.Year && od.Order.Status == orderStatus)

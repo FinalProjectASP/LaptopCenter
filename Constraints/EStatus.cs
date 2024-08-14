@@ -3,6 +3,7 @@
     public enum EStatus
     {
         Pending,
-        Confirmed
+        Processing,
+        Completed
     }
 }

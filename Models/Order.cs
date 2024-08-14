@@ -9,6 +9,8 @@ namespace LaptopCenter.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
         [Required]
+        public DateTime OrderDate { get; set; }
+        [Required]
         public DateTime DeliveryDate { get; set; }
         [Required]
         public string DeleveryLocal { get; set; }

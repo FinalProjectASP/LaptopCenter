@@ -1,0 +1,233 @@
+﻿@model LaptopCenter.Models.Review
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create" class="master" method="post" novalidate>
+    <h1>Review And rating</h1>
+    <h2>How was your experience about our product?</h2>
+
+    <div class="rating-component">
+        <div class="status-msg">
+            <label>
+                <input asp-for="Rate" class="rating_msg" type="hidden"
+                       name="rating_msg" value="" />
+            </label>
+
+            <span asp-validation-for="Rate" class="text-danger"></span>
+        </div>
+        <div class="stars-box">
+            <i class="star fa fa-star" title="1 star"
+               data-message="Poor" data-value="1"></i>
+            <i class="star fa fa-star" title="2 stars"
+               data-message="Too bad" data-value="2"></i>
+            <i class="star fa fa-star" title="3 stars"
+               data-message="Average quality" data-value="3"></i>
+            <i class="star fa fa-star" title="4 stars"
+               data-message="Nice" data-value="4"></i>
+            <i class="star fa fa-star" title="5 stars"
+               data-message="very good qality" data-value="5"></i>
+        </div>
+        <div class="starrate">
+            <label>
+                <input asp-for="Rate" class="ratevalue" type="hidden"
+                       name="rate_value" value="" />
+            </label>
+        </div>
+    </div>
+
+    <div class="feedback-tags">
+        <div class="tags-container" data-tag-set="1">
+            <div class="question-tag">
+                Why was your experience so bad?
+            </div>
+        </div>
+        <div class="tags-container" data-tag-set="2">
+            <div class="question-tag">
+                Why was your experience so bad?
+            </div>
+
+        </div>
+
+        <div class="tags-container" data-tag-set="3">
+            <div class="question-tag">
+                Why was your average rating experience ?
+            </div>
+        </div>
+        <div class="tags-container" data-tag-set="4">
+            <div class="question-tag">
+                Why was your experience good?
+            </div>
+        </div>
+
+        <div class="tags-container" data-tag-set="5">
+            <div class="make-compliment">
+                <div class="compliment-container">
+                    Give a compliment
+                    <i class="far fa-smile-wink"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="tags-box">
+            <input type="text" class="tag form-control"
+                   name="comment" asp-for="Comment"
+                   placeholder="please enter your review">
+
+            <input type="hidden" asp-for="ProductId"
+                   value="@ViewBag.ProductId" />
+
+            <input type="hidden" asp-for="OrderId"
+                   value="@ViewBag.OrderId" />
+        </div>
+
+    </div>
+
+    <div class="button-box">
+        <button type="submit" value="Create" class=" done btn btn-warning"
+                disabled="disabled">
+            Add review
+        </button>
+    </div>
+
+    <div class="submited-box">
+        <div class="loader"></div>
+        <div class="success-message">
+            Thank you!
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Profile" asp-controller="Home" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(".rating-component .star")
+            .on("mouseover", function () {
+                var onStar = parseInt($(this).data("value"), 10);
+                $(this)
+                    .parent()
+                    .children("i.star")
+                    .each(function (index) {
+                        if (index < onStar) {
+                            $(this).addClass("hover");
+                        } else {
+                            $(this).removeClass("hover");
+                        }
+                    });
+            })
+            .on("mouseout", function () {
+                $(this)
+                    .parent()
+                    .children("i.star")
+                    .each(function () {
+                        $(this).removeClass("hover");
+                    });
+            });
+
+        $(".rating-component .stars-box .star").on("click", function () {
+            var onStar = parseInt($(this).data("value"), 10);
+            var stars = $(this).parent().children("i.star");
+            var ratingMessage = $(this).data("message");
+
+            var msg = onStar;
+            $(".rating-component .starrate .ratevalue").val(msg);
+
+            $(".fa-smile-wink").show();
+            $(".button-box .done").show();
+
+            if (onStar === 5) {
+                $(".button-box .done").removeAttr("disabled");
+            } else {
+                $(".button-box .done").attr("disabled", true);
+            }
+
+            stars.removeClass("selected");
+            stars.slice(0, onStar).addClass("selected");
+
+            $(".status-msg .rating_msg").val(ratingMessage);
+            $(".status-msg").html(ratingMessage);
+            $("[data-tag-set]").hide();
+            $("[data-tag-set=" + onStar + "]").show();
+        });
+
+        $(".feedback-tags").on("click", function () {
+            var choosedTagsLength = $(this).parent("div.tags-box").find("input").length;
+            choosedTagsLength += 1;
+
+            if ($(this).hasClass("choosed")) {
+                $(this).removeClass("choosed");
+                choosedTagsLength -= 2;
+            } else {
+                $(this).addClass("choosed");
+                $(".button-box .done").removeAttr("disabled");
+            }
+
+            console.log(choosedTagsLength);
+
+            if (choosedTagsLength <= 0) {
+                $(".button-box .done").attr("disabled", true);
+            }
+        });
+
+        $(".compliment-container .fa-smile-wink").on("click", function () {
+            $(this).fadeOut("slow", function () {
+                $(".list-of-compliment").fadeIn();
+            });
+        });
+
+        $(".done").on("click", function (e) {
+            e.preventDefault(); // Prevent the form from submitting normally
+
+            // Prepare review data
+            var reviewData = {
+                Comment: $("input[name='comment']").val(),  // Match name attribute of your input field
+                Rate: $("input[name='rate_value']").val(),  // Match name attribute of your input field
+                ProductId: $("input[name='ProductId']").val(), // Match name attribute of your input field
+                OrderId: $("input[name='OrderId']").val() // Match name attribute of your input field
+            };
+
+            console.log(reviewData);
+
+            $.ajax({
+                url: '@Url.Action("CreateReview", "Reviews")', // Ensure the action name is correct
+                type: 'POST',
+                data: reviewData,
+                success: function (response) {
+                    if (response.success) {
+                        $(".rating-component, .feedback-tags, .button-box").hide();
+                        $(".submited-box").show();
+                        $(".submited-box .loader").show();
+                        setTimeout(function () {
+                            $(".submited-box .loader").hide();
+                            $(".submited-box .success-message").show();
+                        }, 1500);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: response.message,
+                            showConfirmButton: true
+                        });
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        showConfirmButton: true
+                    });
+                }
+            });
+        });
+    </script>
+
+}

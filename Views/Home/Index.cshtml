@@ -41,7 +41,27 @@
             {
 
                 <div class="card">
-                            <img src="~/img/products/@product.ProductImage" alt="" class="product_img">
+                     <img src="~/img/products/@product.ProductImage" alt="" class="product_img">
+
+                    @{
+                        int maxNameLength = 50; // Set the maximum length for the product name
+                        int maxDescriptionLength = 100; // Set the maximum length for the short description
+
+                        string truncatedName = product.ProductName.Length > maxNameLength
+                        ? product.ProductName.Substring(0, maxNameLength) + "..."
+                        : product.ProductName;
+
+                        string truncatedDescription = product.ShortDescription.Length > maxDescriptionLength
+                        ? product.ShortDescription.Substring(0, maxDescriptionLength) + "..."
+                        : product.ShortDescription;
+                    }
+
+                    <div class="last_product mt-5">
+                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                            <span class="last_product_name">@truncatedName</span>
+                            <p class="last_product_description">@truncatedDescription</p>
+                        </a>
+                    </div>
                     <div class="accordion-container">
                         <div class="card-body pt-0">
                             <h4 class="Specification-title mb-0">Specifications</h4>
@@ -88,55 +108,101 @@
         <div class="col-md-12">
             <h2 class="product-title"><b>Best Salers</b></h2>
             <div class="row">
-                @if (ViewBag.LatestProducts != null && ViewBag.LatestProducts.Count > 0)
+                @if (ViewBag.TopSellingProducts != null && ViewBag.TopSellingProducts.Count > 0)
                 {
                     foreach (var product in ViewBag.TopSellingProducts)
                     {
-                        <div class="col-6 col-md-3">
+                        <div class="col-6 col-md-3 pb-4">
                             <div class="product-card">
-                                <div class="logo-cart">
-                                    <a asp-controller="Home" asp-action="ProductDetail">
-                                        <img src="~/img/suppliers/@product.SupplierLogoUrl" alt="logo">
-                                        <i class='bx bx-shopping-bag'></i>
-                                    </a>
+                                <form asp-action="AddToCart" method="post">
+                                    <input type="hidden" name="ProductId" value="@product.ProductId" />
+                                    <input type="hidden" name="Quantity" value="1" />
 
-                                </div>
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <div class="main-images">
-                                        <img id="blue" class="blue active" src="~/img/products/@product.ProductImage" alt="blue">
+                                    <div class="logo-cart">
+                                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                            <img src="~/img/suppliers/@product.Supplier.LogoUrl" alt="logo">
+                                            <i class='bx bx-shopping-bag'></i>
+                                        </a>
+
                                     </div>
-                                </a>
-
-                                <div class="shoe-details">
-                                    <a asp-controller="Home" asp-action="ProductDetail">
-                                        <span class="shoe_name">@product.ProductName</span>
-                                        <p>@product.ShortDescription</p>
-                                    </a>
-
-                                </div>
-                                <div class="color-price row">
-                                    <div class="color-option">
-                                        <span class="color">Rate:</span>
-                                        <div class="stars">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                        <div class="main-images">
+                                            <img id="blue" class="blue active" src="~/img/products/@product.ProductImage" alt="blue">
                                         </div>
+                                    </a>
+                                    @{
+                                        int maxNameLength = 20; // Set the maximum length for the product name
+                                        int maxDescriptionLength = 50; // Set the maximum length for the short description
+
+                                        string truncatedName = product.ProductName.Length > maxNameLength
+                                        ? product.ProductName.Substring(0, maxNameLength) + "..."
+                                        : product.ProductName;
+
+                                        string truncatedDescription = product.ShortDescription.Length > maxDescriptionLength
+                                        ? product.ShortDescription.Substring(0, maxDescriptionLength) + "..."
+                                        : product.ShortDescription;
+                                    }
+
+                                    <div class="shoe-details">
+                                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                            <span class="shoe_name">@truncatedName</span>
+                                            <p class="shortdescription">@truncatedDescription</p>
+                                        </a>
                                     </div>
-                                    <div class="price">
-                                        <span class="price_num">$@product.Price</span>
-                                        <span class="price_letter">Nine dollar only</span>
+
+                                    <div class="color-price">
+                                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                            <div class="color-option">
+                                                <span class="color">Rate: </span>
+                                                <div class="stars">
+                                                    <div class="Rating__Container-cmor0f-0 dlqGRR">
+                                                        @for (int i = 0; i < 5; i++)
+                                                        {
+                                                            if (i < Math.Floor(@product.AverageRate))
+                                                            {
+                                                                // Full star
+                                                                <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                    <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Filled-pkcl3w-2 HCqPk ebpkzz">
+                                                                        <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            }
+                                                            else if (i < @product.AverageRate)
+                                                            {
+                                                                // Half star
+                                                                <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-half ebpkzz " viewBox="0 0 16 16.8">
+                                                                        <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z" />
+                                                                    </svg>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                // Empty star
+                                                                <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                    <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Unfilled-pkcl3w-1 HCqPk krjrmM">
+                                                                        <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="price">
+
+                                                <span class="price_num">Price: $@product.Price</span>
+                                                <span class="price_letter">Nine dollar only</span>
+                                            </div>
+                                        </a>
                                     </div>
-                                </div>
-                                <div class="button">
-                                    <div class="button-layer"></div>
-                                    <button asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">Add To Cart</button>
-                                </div>
+                                    <div class="button">
+                                        <div class="button-layer"></div>
+                                        <button type="submit" class="btn btn-primary">Add To Cart</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-
                     }
                 }
                 else

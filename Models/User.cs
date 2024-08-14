@@ -1,14 +1,11 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LaptopCenter.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [StringLength(100, ErrorMessage = "Full Name cannot exceed 100 characters.")]
         public string FullName { get; set; }
 
@@ -24,7 +21,5 @@ namespace LaptopCenter.Models
         [DataType(DataType.Date, ErrorMessage = "Invalid date format. Please use YYYY-MM-DD.")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateOnly Birthday { get; set; }
-
     }
-
 }

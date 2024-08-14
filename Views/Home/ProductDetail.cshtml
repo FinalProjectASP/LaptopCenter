@@ -8,142 +8,240 @@
     <div class="row">
         @if (ViewBag.Product != null )
         {
-            <div class="col-md-4 col-12 product-left">
-                <div class="product-image">
-                    <img src="~/img/products/@ViewBag.Product.ProductImage" alt="Podcast Title">
-                </div>           
-            </div>
-            <div class="col-md-8 col-12 product-right ps-md-5">
-                <div class="postcard__text">
-                    <div class="laptop-details">
-                        <span class="laptop_name">
-                            @ViewBag.Product.ProductName
-                        </span>
-                        <p>@ViewBag.Product.ShortDescription</p>
-                    </div>
-
-                    <div class="postcard__subtitle small color-price">
-                        <span class="laptop_price">
-                            Buy now at price:
-                        </span>
-                        <div class="price ms-3">
-                            <span class="price_num" id="numberPrice">@ViewBag.Product.Price</span>
-                            <span class="price_letter" id="letterPrice">Nine dollar only</span>
-                        </div>
-                    </div>
-                    <div class="warpper">
-                        <input class="radio" id="one" name="group" type="radio" checked>
-                        <input class="radio" id="two" name="group" type="radio">
-                        <input class="radio" id="three" name="group" type="radio">
-                        <div class="tabs">
-                            <label class="tab" id="one-tab" for="one">Description</label>
-                            <label class="tab" id="two-tab" for="two">Specifications</label>
-                            <label class="tab" id="three-tab" for="three">Policies</label>
-                        </div>
-                        <div class="panels">
-                            <div class="panel" id="one-panel">
-                                <div class="panel-title mb-3">Detail Description</div>
-                                <p>@ViewBag.Product.DetailDescription</p>
-                            </div>
-                            <div class="panel" id="two-panel">
-                                <div class="panel-title mb-3">Highlighted Specifications</div>
-                                <div class="row">
-                                    <div class="col-8 specifications">
-                                        <span>CPU</span>
-                                        <p>@ViewBag.Product.CPU</p>
-                                    </div>
-                                    <div class="col-4 specifications">
-                                        <div class="evaluate_start">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-8 specifications">
-                                        <span>RAM</span>
-                                        <p>@ViewBag.Product.RAM</p>
-                                    </div>
-                                    <div class="col-4 specifications">
-                                        <div class="evaluate_start">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-8 specifications">
-                                        <span>Graphic Card</span>
-                                        <p>@ViewBag.Product.GraphicsCard</p>
-                                    </div>
-                                    <div class="col-4 specifications">
-                                        <div class="evaluate_start">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-8 specifications">
-                                        <span>ScreenSize</span>
-                                        <p>@ViewBag.Product.ScreenSize</p>
-                                    </div>
-                                    <div class="col-4 specifications">
-                                        <div class="evaluate_start">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel" id="three-panel">
-                                <div class="panel-title mb-3">Product Policies</div>
-                                <div class="row">
-                                    <div class="col-6 d-flex policies">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M14.94 19.5L12 17.77L9.06 19.5l.78-3.34l-2.59-2.24l3.41-.29L12 10.5l1.34 3.13l3.41.29l-2.59 2.24M20 2H4v2l4.86 3.64a8 8 0 1 0 6.28 0L20 4m-2 11a6 6 0 1 1-7.18-5.88a5.9 5.9 0 0 1 2.36 0A6 6 0 0 1 18 15m-5.37-8h-1.26l-4-3h9.34Z" /></svg>
-                                        <p>Genuine product</p>
-                                    </div>
-                                    <div class="col-6 d-flex policies">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" d="M13.854 7.854a.5.5 0 0 0-.708-.708L9.5 10.793L7.854 9.146a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0zm-3.577-5.77a.5.5 0 0 0-.554 0a15.05 15.05 0 0 1-6.294 2.421A.5.5 0 0 0 3 5v4.5c0 3.891 2.307 6.73 6.82 8.467a.5.5 0 0 0 .36 0C14.693 16.23 17 13.39 17 9.5V5a.5.5 0 0 0-.43-.495a15.05 15.05 0 0 1-6.293-2.421M4 5.428a16 16 0 0 0 5.6-2.082l.4-.249l.4.249A16 16 0 0 0 16 5.428V9.5c0 3.392-1.968 5.863-6 7.463c-4.032-1.6-6-4.07-6-7.463z" /></svg>
-                                        <p>Warranty (months):</p>
-                                    </div>
-                                    <div class="col-6 d-flex policies">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" stroke-miterlimit="1.5" d="M8 19a2 2 0 1 0 0-4a2 2 0 0 0 0 4m10 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4" /><path d="M10.05 17H15V6.6a.6.6 0 0 0-.6-.6H1m4.65 11H3.6a.6.6 0 0 1-.6-.6v-4.9" /><path stroke-linejoin="round" d="M2 9h4" /><path d="M15 9h5.61a.6.6 0 0 1 .548.356l1.79 4.028a.6.6 0 0 1 .052.243V16.4a.6.6 0 0 1-.6.6h-1.9M15 17h1" /></g></svg>
-                                        <p>Free delivery within 90 minutes</p>
-                                    </div>
-                                    <div class="col-6 d-flex policies">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M18.284 43.171a20 20 0 0 1-8.696-5.304a6 6 0 0 0-5.182-9.838A20 20 0 0 1 4 24c0-2.09.32-4.106.916-6H5a6 6 0 0 0 5.385-8.65a20 20 0 0 1 8.267-4.627A6 6 0 0 0 24 8a6 6 0 0 0 5.348-3.277a20 20 0 0 1 8.267 4.627A6 6 0 0 0 43.084 18A20 20 0 0 1 44 24c0 1.38-.14 2.728-.406 4.03a6 6 0 0 0-5.182 9.838a20 20 0 0 1-8.696 5.303a6.003 6.003 0 0 0-11.432 0Z" /><path d="M24 31a7 7 0 1 0 0-14a7 7 0 0 0 0 14Z" /></g></svg>
-                                        <p>Free installation support</p>
-                                    </div>
-                                    <div class="col-6 d-flex policies">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.527 15.977h3.24c1.278-.021 3.233.652 3.233 3.08C22 21.577 19.588 22 18.766 22H7.946C5.438 22 2 21.491 2 17.17V8.002h20v4.517m-6.473 3.457a.8.8 0 0 1 .273-.58l1.702-1.42m-1.975 2a.8.8 0 0 0 .275.623l1.7 1.383M2.006 7.991l.921-2.3c.748-1.789 1.122-2.683 1.88-3.186S6.537 2 8.48 2h7.02c1.944 0 2.916 0 3.674.504c.758.503 1.131 1.397 1.88 3.185L22 7.995m-10.037.006v-6m-2 10h4" color="currentColor" /></svg>
-                                        <p>Return policy</p>
-                                    </div>
-                                    <div class="col-6 d-flex policies">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 14 14"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7.506 13.065a2.7 2.7 0 0 0 3.37-.36l.38-.38a.91.91 0 0 0 0-1.28l-1.6-1.59a.9.9 0 0 0-1.27 0v0a.91.91 0 0 1-1.28 0l-2.55-2.55a.91.91 0 0 1 0-1.28v0a.9.9 0 0 0 0-1.27l-1.54-1.6a.91.91 0 0 0-1.28 0l-.38.38a2.7 2.7 0 0 0-.41 3.37a24.2 24.2 0 0 0 6.56 6.56m5.959-9.893h-2.748a.215.215 0 0 1-.215-.216v0a.22.22 0 0 1 .053-.142l1.96-2.24a.2.2 0 0 1 .154-.07v0c.112 0 .203.092.203.204v3.353M8.85 4.06H6.48v-.505a.89.89 0 0 1 .533-.814l1.32-.577a.866.866 0 0 0-.348-1.66h-.616a.89.89 0 0 0-.838.593" /></svg>
-                                        <p>Customer support 24/7</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="postcard__tagbox list-unstyled">
-                            <li class="tag__item"><i class="fas fa-tag me-2"></i>Podcast</li>
-                            <li class="tag__item"><i class="fas fa-clock me-2"></i>55 mins.</li>
-                            <li class="tag__item play blue">
-                                <a href="#"><i class="fas fa-play me-2"></i>Play Episode</a>
-                            </li>
-                        </ul>
+                <div class="col-md-4 col-12 product-left">
+                    <div class="product-image">
+                        <img src="~/img/products/@ViewBag.Product.ProductImage" alt="Podcast Title">
                     </div>
                 </div>
+                <div class="col-md-8 col-12 product-right ps-md-5">
+                    <div class="postcard__text">
+                        <form asp-action="AddToCart" method="post">
+                            <input type="hidden" name="ProductId" value="@ViewBag.Product.ProductId" />
+                            <div class="laptop-details">
+                                <span class="laptop_name">
+                                    @ViewBag.Product.ProductName
+                                </span>
+                                <p>@ViewBag.Product.ShortDescription</p>
+                            </div>
+                            <div class="postcard__subtitle small color-price d-flex">
+                                <span class="laptop_price">
+                                    Buy now at price:
+                                </span>
+                                <div class="price ms-3">
+                                    <span class="price_num" id="numberPrice">@ViewBag.Product.Price</span>
+                                    <span class="price_letter" id="letterPrice">Nine dollar only</span>
+                                </div>
+                            </div>
+                        <div class="cart_item_quantity cart_info_col">
+                            <div class="cart_item_title ms-2" id="quantity_title">Quantity</div>
+                            <div class="d-flex flex-row align-items-center mt-2" id="quantity_selector">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="decrement_button">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <input type="text" readonly id="quantity_display" name="Quantity" class="form-control text-center mx-2" value="1" />
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="increment_button">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="cart_buttons text-start mb-5 mt-4">
+                            <button type="submit" class="button cart_button_checkout">Add To Cart</button>
+                        </div>
+                        </form>                       
+                    </div>
+                </div>
+            <div class="warpper card_des">
+                <input class="radio" id="one" name="group" type="radio" checked>
+                <input class="radio" id="two" name="group" type="radio">
+                <input class="radio" id="three" name="group" type="radio">
+                <div class="tabs">
+                    <label class="tab" id="one-tab" for="one">Specifications</label>
+                    <label class="tab" id="two-tab" for="two">Description</label>
+                    <label class="tab" id="three-tab" for="three">Policies</label>
+                </div>
+                <div class="panels">
+                    <div class="panel" id="one-panel">
+                        <div class="panel-title mb-3">Highlighted Specifications</div>
+                        <div class="row">
+                            <div class="col-8 specifications">
+                                <span>CPU</span>
+                                <p>@ViewBag.Product.CPU</p>
+                            </div>
+
+                            <div class="col-8 specifications">
+                                <span>RAM</span>
+                                <p>@ViewBag.Product.RAM</p>
+                            </div>
+
+                            <div class="col-8 specifications">
+                                <span>Graphic Card</span>
+                                <p>@ViewBag.Product.GraphicsCard</p>
+                            </div>
+
+                            <div class="col-8 specifications">
+                                <span>ScreenSize</span>
+                                <p>@ViewBag.Product.ScreenSize</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="panel" id="two-panel">
+                        <div class="panel-title mb-3">Detail Description</div>
+                        <p>@ViewBag.Product.DetailDescription</p>
+                    </div>
+                    <div class="panel" id="three-panel">
+                        <div class="panel-title mb-3">Product Policies</div>
+                        <div class="row">
+                            <div class="col-6 d-flex policies">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M14.94 19.5L12 17.77L9.06 19.5l.78-3.34l-2.59-2.24l3.41-.29L12 10.5l1.34 3.13l3.41.29l-2.59 2.24M20 2H4v2l4.86 3.64a8 8 0 1 0 6.28 0L20 4m-2 11a6 6 0 1 1-7.18-5.88a5.9 5.9 0 0 1 2.36 0A6 6 0 0 1 18 15m-5.37-8h-1.26l-4-3h9.34Z" /></svg>
+                                <p>Genuine product</p>
+                            </div>
+                            <div class="col-6 d-flex policies">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" d="M13.854 7.854a.5.5 0 0 0-.708-.708L9.5 10.793L7.854 9.146a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0zm-3.577-5.77a.5.5 0 0 0-.554 0a15.05 15.05 0 0 1-6.294 2.421A.5.5 0 0 0 3 5v4.5c0 3.891 2.307 6.73 6.82 8.467a.5.5 0 0 0 .36 0C14.693 16.23 17 13.39 17 9.5V5a.5.5 0 0 0-.43-.495a15.05 15.05 0 0 1-6.293-2.421M4 5.428a16 16 0 0 0 5.6-2.082l.4-.249l.4.249A16 16 0 0 0 16 5.428V9.5c0 3.392-1.968 5.863-6 7.463c-4.032-1.6-6-4.07-6-7.463z" /></svg>
+                                <p>Warranty (months):</p>
+                            </div>
+                            <div class="col-6 d-flex policies">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" stroke-miterlimit="1.5" d="M8 19a2 2 0 1 0 0-4a2 2 0 0 0 0 4m10 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4" /><path d="M10.05 17H15V6.6a.6.6 0 0 0-.6-.6H1m4.65 11H3.6a.6.6 0 0 1-.6-.6v-4.9" /><path stroke-linejoin="round" d="M2 9h4" /><path d="M15 9h5.61a.6.6 0 0 1 .548.356l1.79 4.028a.6.6 0 0 1 .052.243V16.4a.6.6 0 0 1-.6.6h-1.9M15 17h1" /></g></svg>
+                                <p>Free delivery within 90 minutes</p>
+                            </div>
+                            <div class="col-6 d-flex policies">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M18.284 43.171a20 20 0 0 1-8.696-5.304a6 6 0 0 0-5.182-9.838A20 20 0 0 1 4 24c0-2.09.32-4.106.916-6H5a6 6 0 0 0 5.385-8.65a20 20 0 0 1 8.267-4.627A6 6 0 0 0 24 8a6 6 0 0 0 5.348-3.277a20 20 0 0 1 8.267 4.627A6 6 0 0 0 43.084 18A20 20 0 0 1 44 24c0 1.38-.14 2.728-.406 4.03a6 6 0 0 0-5.182 9.838a20 20 0 0 1-8.696 5.303a6.003 6.003 0 0 0-11.432 0Z" /><path d="M24 31a7 7 0 1 0 0-14a7 7 0 0 0 0 14Z" /></g></svg>
+                                <p>Free installation support</p>
+                            </div>
+                            <div class="col-6 d-flex policies">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.527 15.977h3.24c1.278-.021 3.233.652 3.233 3.08C22 21.577 19.588 22 18.766 22H7.946C5.438 22 2 21.491 2 17.17V8.002h20v4.517m-6.473 3.457a.8.8 0 0 1 .273-.58l1.702-1.42m-1.975 2a.8.8 0 0 0 .275.623l1.7 1.383M2.006 7.991l.921-2.3c.748-1.789 1.122-2.683 1.88-3.186S6.537 2 8.48 2h7.02c1.944 0 2.916 0 3.674.504c.758.503 1.131 1.397 1.88 3.185L22 7.995m-10.037.006v-6m-2 10h4" color="currentColor" /></svg>
+                                <p>Return policy</p>
+                            </div>
+                            <div class="col-6 d-flex policies">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icons" width="1em" height="1em" viewBox="0 0 14 14"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M7.506 13.065a2.7 2.7 0 0 0 3.37-.36l.38-.38a.91.91 0 0 0 0-1.28l-1.6-1.59a.9.9 0 0 0-1.27 0v0a.91.91 0 0 1-1.28 0l-2.55-2.55a.91.91 0 0 1 0-1.28v0a.9.9 0 0 0 0-1.27l-1.54-1.6a.91.91 0 0 0-1.28 0l-.38.38a2.7 2.7 0 0 0-.41 3.37a24.2 24.2 0 0 0 6.56 6.56m5.959-9.893h-2.748a.215.215 0 0 1-.215-.216v0a.22.22 0 0 1 .053-.142l1.96-2.24a.2.2 0 0 1 .154-.07v0c.112 0 .203.092.203.204v3.353M8.85 4.06H6.48v-.505a.89.89 0 0 1 .533-.814l1.32-.577a.866.866 0 0 0-.348-1.66h-.616a.89.89 0 0 0-.838.593" /></svg>
+                                <p>Customer support 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="product-title mt-4">Product <b>Reviews</b></h2>
+            <div class="Header__Container-sc-17gc7x6-1 kPkHRI">
+                <div class="Header__SupplierAndStats-sc-17gc7x6-4 dxSSmX">
+                    <div class="Stats__Component-aktd5o-0 hpOZPO">
+                        <div class="Stats__Container-aktd5o-1 fKDQYu">
+                            <div class="Stats__RatingContainer-aktd5o-2 fSyrLr">
+                                <div class="Stats__RatingValue-aktd5o-3 SeuOT">@ViewBag.AverageRating</div>
+                                <div class="Rating__Container-cmor0f-0 dlqGRR">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (i < Math.Floor(ViewBag.AverageRating))
+                                        {
+                                            // Full star
+                                            <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Filled-pkcl3w-2 HCqPk ebpkzz">
+                                                    <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                </svg>
+                                            </div>
+                                        }
+                                        else if (i < ViewBag.AverageRating)
+                                        {
+                                            // Half star
+                                            <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-half ebpkzz " viewBox="0 0 16 16.8">
+                                                    <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z" />
+                                                </svg>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            // Empty star
+                                            <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Unfilled-pkcl3w-1 HCqPk krjrmM">
+                                                    <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                </svg>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="Stats__RatingCount-aktd5o-4 dFRcCH ms-3">(@ViewBag.Review.Count)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="filtroComentarios" class="filter-container">
+                <button class="btnFiltroComentarios active" onclick="filterSelection('all')">All</button>
+                <button class="btnFiltroComentarios" onclick="filterSelection('5star')">5 estrellas</button>
+                <button class="btnFiltroComentarios" onclick="filterSelection('4star')">4 estrellas</button>
+                <button class="btnFiltroComentarios" onclick="filterSelection('3star')">3 estrellas</button>
+                <button class="btnFiltroComentarios" onclick="filterSelection('2star')">2 estrellas</button>
+                <button class="btnFiltroComentarios" onclick="filterSelection('1star')">1 estrella</button>
+            </div>
+            <div class="containerDivFiltro">
+                @foreach (var r in ViewBag.Review)
+                {
+                    var rate = r.Rate;
+                    <div class="filterDiv @($"{rate}star")">
+                        <div class="flex justify-center items-center bg-purple-700">
+                            <div style="width: 100%; margin-top: 0px; margin-right: 0px;">
+                                <div class="Classic__ClassicContainer-sc-19u56uy-0 enEynK">
+                                    <div class="Classic__Heading-sc-19u56uy-3 bBiQVx">
+                                        <div class="AuthorPicture__Container-sc-1baibv3-0 ifcLIN Classic__StyledAuthorPicture-sc-19u56uy-1 bjfrNg"
+                                             style="background-image: url('https://lh3.googleusercontent.com/-nCmFU8nfXHg/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnnOgDaatlq4Hqz05_lUELud38feA/c0x00000000-cc-rp/photo.jpg'); opacity: 1; transition: opacity 0.3s ease 0s;">
+                                        </div>
+                                        <div class="Classic__HeadingInfo-sc-19u56uy-2 idRCWT">
+                                            <div class="Classic__AuthorName-sc-19u56uy-4 bExHms">3M</div>
+                                            <div class="Rating__Container-cmor0f-0 dlqGRR Classic__StyledRating-sc-19u56uy-5 cKUNZS">
+
+                                                    @for (int i = 0; i < 5; i++)
+                                                    {
+                                                        @if (i <= @r.Rate)
+                                                        {
+                                                            <div class="Box__Container-vw10v2-0 PWKqr">
+                                                                <!-- full star -->
+                                                                <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Unfilled-pkcl3w-1 HCqPk krjrmM">
+                                                                    <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                </svg>
+
+                                                                <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Filled-pkcl3w-2 HCqPk ebpkzz">
+                                                                    <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                </svg>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="Box__Container-vw10v2-0 PWKqr">
+                                                                <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Unfilled-pkcl3w-1 HCqPk krjrmM">
+                                                                    <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                </svg>
+                                                            </div>
+                                                        }
+                                                    }
+                                                <!-- Repeat for remaining stars -->
+
+                                                <div class="PublicationDate__Container-sc-1r10lfu-0 cAlCsI Classic__StyledPublicationDate-sc-19u56uy-6 iLeOhO">
+                                                    <div datetime="October 14, 2020, 2:00 AM GMT+2"
+                                                         title="October 14, 2020, 2:00 AM GMT+2"
+                                                         class="DateTime__Time-sc-13gi7wj-0 kUVVHj Classic__StyledPublicationDate-sc-19u56uy-6 iLeOhO">
+                                                        @r.Date
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="Classic__Content-sc-19u56uy-7 eXiSiN">
+                                        <div class="Text__Container-x4hk0b-0 REwpY Classic__StyledText-sc-19u56uy-8 eTEVoh">
+                                            <div class="SimpleShortener__Outer-sc-19xjxqz-0 fyDpGN">
+                                                <div class="SimpleShortener__Inner-sc-19xjxqz-1 elBtuP">
+                                                    <div>
+                                                        @r.Comment
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="m-auto" id="noReviewsMessage" style="display: none; margin: 30px 10px 20px 10px ;">No reviews available</div>
             </div>
         }
         else
@@ -166,55 +264,102 @@
                         {
                             <div class="col-6 col-md-3 pb-4">
                                 <div class="product-card">
-                                    <div class="logo-cart">
-										<a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
-                                            <img src="~/img/suppliers/@product.Supplier.LogoUrl" alt="logo">
-                                            <i class='bx bx-shopping-bag'></i>
-                                        </a>
+                                    <form asp-action="AddToCart" method="post">
+                                        <input type="hidden" name="ProductId" value="@product.ProductId" />
+                                        <input type="hidden" name="Quantity" value="1" />
 
-                                    </div>
-                                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
-                                        <div class="main-images">
-                                            <img id="blue" class="blue active" src="~/img/products/@product.ProductImage" alt="blue">
+                                        <div class="logo-cart">
+                                            <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                                <img src="~/img/suppliers/@product.Supplier.LogoUrl" alt="logo">
+                                                <i class='bx bx-shopping-bag'></i>
+                                            </a>
+
                                         </div>
-                                    </a>
-
-                                    <div class="shoe-details">
                                         <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
-                                            <span class="shoe_name">@product.ProductName</span>
-                                            <p>@product.ShortDescription</p>
-                                        </a>
-
-                                    </div>
-                                    <div class="color-price">
-                                        <div class="color-option">
-                                            <span class="color">Rate:</span>
-                                            <div class="stars">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            <div class="main-images">
+                                                <img id="blue" class="blue active" src="~/img/products/@product.ProductImage" alt="blue">
                                             </div>
+                                        </a>
+                                        @{
+                                            int maxNameLength = 20; // Set the maximum length for the product name
+                                            int maxDescriptionLength = 50; // Set the maximum length for the short description
+
+                                            string truncatedName = product.ProductName.Length > maxNameLength
+                                            ? product.ProductName.Substring(0, maxNameLength) + "..."
+                                            : product.ProductName;
+
+                                            string truncatedDescription = product.ShortDescription.Length > maxDescriptionLength
+                                            ? product.ShortDescription.Substring(0, maxDescriptionLength) + "..."
+                                            : product.ShortDescription;
+                                        }
+
+                                        <div class="shoe-details">
+                                            <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                                <span class="shoe_name">@truncatedName</span>
+                                                <p class="shortdescription">@truncatedDescription</p>
+                                            </a>
                                         </div>
-                                        <div class="price">
-                                            <span class="price_num">$@product.Price</span>
-                                            <span class="price_letter">Nine dollar only</span>
+
+                                        <div class="color-price">
+                                            <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                                <div class="color-option">
+                                                    <span class="color">Rate: </span>
+                                                    <div class="stars">
+                                                        <div class="Rating__Container-cmor0f-0 dlqGRR">
+                                                            @for (int i = 0; i < 5; i++)
+                                                            {
+                                                                if (i < Math.Floor(@product.AverageRate))
+                                                                {
+                                                                    // Full star
+                                                                    <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                        <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Filled-pkcl3w-2 HCqPk ebpkzz">
+                                                                            <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                }
+                                                                else if (i < @product.AverageRate)
+                                                                {
+                                                                    // Half star
+                                                                    <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-half ebpkzz " viewBox="0 0 16 16.8">
+                                                                            <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z" />
+                                                                        </svg>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    // Empty star
+                                                                    <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                        <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Unfilled-pkcl3w-1 HCqPk krjrmM">
+                                                                            <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="price">
+                                                    <span class="price_num">Price: $@product.Price</span>
+                                                    <span class="price_letter">Nine dollar only</span>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </div>
-                                    <div class="button">
-                                        <div class="button-layer"></div>
-                                        <button>Add To Cart</button>
-                                    </div>
+                                        <div class="button">
+                                            <div class="button-layer"></div>
+                                            <button type="submit" class="btn btn-primary">Add To Cart</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         }
                     }
                     else
                     {
-                        <tr>
-                            <td colspan="5">No products available</td>
-                        </tr>
+                        <div class="card">
+                            <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
+                            <p class="pb-3" colspan="5">No products here!</p>
+                        </div>
                     }
                 </div>
             </div>
@@ -222,3 +367,84 @@
     </div>
 </div>
 <!-- Product:End -->
+@section Scripts {
+    <script type="text/javascript">
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const decrementButton = document.getElementById('decrement_button');
+            const incrementButton = document.getElementById('increment_button');
+            const quantityDisplay = document.getElementById('quantity_display');
+
+            decrementButton.addEventListener('click', function () {
+                let currentValue = parseInt(quantityDisplay.value, 10);
+                if (currentValue > 1) { // Assuming you want to prevent going below 1
+                    quantityDisplay.value = currentValue - 1;
+                }
+            });
+
+            incrementButton.addEventListener('click', function () {
+                let currentValue = parseInt(quantityDisplay.value, 10);
+                quantityDisplay.value = currentValue + 1;
+            });
+        });
+
+
+
+
+        filterSelection("all");
+        function filterSelection(c) {
+            var x, i, visibleCount = 0;
+            x = document.getElementsByClassName("filterDiv");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "showDivFilter");
+                if (x[i].className.indexOf(c) > -1) {
+                    w3AddClass(x[i], "showDivFilter");
+                    visibleCount++;
+                }
+            }
+            // Show "No reviews available" if no reviews match the filter
+            var noReviewsMessage = document.getElementById("noReviewsMessage");
+            if (visibleCount === 0) {
+                noReviewsMessage.style.display = "block";
+            } else {
+                noReviewsMessage.style.display = "none";
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {
+                    element.className += " " + arr2[i];
+                }
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        // Add active class to the current button (highlight it)
+        var btnContainer = document.getElementById("filtroComentarios");
+        var btns = btnContainer.getElementsByClassName("btnFiltroComentarios");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                current[0].className = current[0].className.replace(" active", "");
+                this.className += " active";
+            });
+        }
+
+    </script>
+}
