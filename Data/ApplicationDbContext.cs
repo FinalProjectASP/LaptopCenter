@@ -1,14 +1,12 @@
 ﻿using LaptopCenter.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Extensions.Options;
-using System.Data;
-using System.Xml;
 
 namespace LaptopCenter.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext()
         {
@@ -31,6 +29,7 @@ namespace LaptopCenter.Data
                 Console.WriteLine(ex.Message);
             }
         }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Category> Categories { get; set; }

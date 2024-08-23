@@ -9,9 +9,12 @@ using LaptopCenter.Data;
 using LaptopCenter.Models;
 using LaptopCenter.DTO;
 using LaptopCenter.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
-namespace LaptopCenter.Controllers
+namespace LaptopCenter.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Area("Admin")]
     public class ProductsController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -22,8 +25,8 @@ namespace LaptopCenter.Controllers
 
 
         public ProductsController(
-            ApplicationDbContext context, 
-            IConfiguration configuration, 
+            ApplicationDbContext context,
+            IConfiguration configuration,
             IProductRepository productRepository,
             ICategoryRepository categoryRepository,
             ISupplierRepository supplierRepository
@@ -160,14 +163,14 @@ namespace LaptopCenter.Controllers
             {
                 _context.Products.Remove(product);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-          return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
+            return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
     }
 }

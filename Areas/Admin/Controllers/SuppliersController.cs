@@ -7,72 +7,75 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LaptopCenter.Data;
 using LaptopCenter.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace LaptopCenter.Controllers
+namespace LaptopCenter.Areas.Admin.Controllers
 {
-    public class CategoriesController : Controller
+    [Authorize(Roles = "Admin")]
+    [Area("Admin")]
+    public class SuppliersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CategoriesController(ApplicationDbContext context)
+        public SuppliersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Categories
+        // GET: Suppliers
         public async Task<IActionResult> Index()
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
+            return _context.Suppliers != null ?
+                        View(await _context.Suppliers.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Suppliers'  is null.");
         }
 
-        // GET: Categories/Create
+        // GET: Suppliers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Suppliers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Create([Bind("SupplierId,SupplierName,LogoUrl")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                _context.Add(supplier);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(supplier);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Suppliers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Suppliers == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var supplier = await _context.Suppliers.FindAsync(id);
+            if (supplier == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(supplier);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Suppliers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("SupplierId,SupplierName,LogoUrl")] Supplier supplier)
         {
-            if (id != category.CategoryId)
+            if (id != supplier.SupplierId)
             {
                 return NotFound();
             }
@@ -81,12 +84,12 @@ namespace LaptopCenter.Controllers
             {
                 try
                 {
-                    _context.Update(category);
+                    _context.Update(supplier);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.CategoryId))
+                    if (!SupplierExists(supplier.SupplierId))
                     {
                         return NotFound();
                     }
@@ -97,49 +100,49 @@ namespace LaptopCenter.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(supplier);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Suppliers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _context.Suppliers == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.CategoryId == id);
-            if (category == null)
+            var supplier = await _context.Suppliers
+                .FirstOrDefaultAsync(m => m.SupplierId == id);
+            if (supplier == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(supplier);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Suppliers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
+            if (_context.Suppliers == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Suppliers'  is null.");
             }
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            var supplier = await _context.Suppliers.FindAsync(id);
+            if (supplier != null)
             {
-                _context.Categories.Remove(category);
+                _context.Suppliers.Remove(supplier);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool SupplierExists(int id)
         {
-          return (_context.Categories?.Any(e => e.CategoryId == id)).GetValueOrDefault();
+            return (_context.Suppliers?.Any(e => e.SupplierId == id)).GetValueOrDefault();
         }
     }
 }

@@ -22,9 +22,9 @@
                                 </div>
 
                                 <div class="cart_buttons">
-                                    <a asp-controller="Authentication" asp-action="Index" class="button cart_button_clear">
-                                        Logout
-                                    </a>
+                                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button id="logout" type="submit" class="button cart_button_clear">Logout</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

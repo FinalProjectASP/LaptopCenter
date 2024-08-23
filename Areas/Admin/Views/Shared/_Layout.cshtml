@@ -1,0 +1,81 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewData["Title"] - FBTBook</title>
+	<link rel="icon" href="~/img/LOGO.jpg" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+	@await RenderSectionAsync("Stylesheets", required: false)
+	<link href="~/css/site.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container-fluid">
+		<section class="row">
+			<div class="col-lg-2 col-md-3 content-left pr-0">
+				<!-- Navbar -->
+				<nav class="navbar navbar-expand-md bg-light navbar-light justify-content-center">
+					<!-- Toggle button -->
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<!-- Brand -->
+
+					<a class="nav-link px-0 text-info" asp-area="Admin" asp-controller="Categories" asp-action="Index">
+						<h3 class="fw-bold">Administrator</h3>
+					</a>
+				</nav>
+				<!-- Navbar -->
+				<nav id="sidebarMenu" class="collapse d-md-block bg-white">
+					<div class="position-sticky">
+						<div class="list-group list-group-flush">
+							<a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Categories" asp-action="Index">Category management</a>
+							<a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">Supplier management</a>
+							<a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Products" asp-action="Index">Product management</a>
+							<form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" onsubmit="return confirm('Are you sure to log out?')">
+								<button type="submit" class="list-group-item list-group-item-action py-4 bg-info text-light">Logout</button>
+							</form>
+						</div>
+					</div>
+				</nav>
+			</div>
+
+			<script>
+				function deleteConfirm() {
+					if (confirm("Are you sure to delete!")) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			</script>
+
+			<main class="col-lg-10 col-md-9 col-12">
+				@RenderBody()
+			</main>
+		</section>
+	</div>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#example').DataTable();
+		});
+	</script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

@@ -202,7 +202,7 @@ a {
 /*category*/
 .form-header {
     display: grid;
-    width: 100%;
+    width: 50%;
 }
 
 .form-links {
