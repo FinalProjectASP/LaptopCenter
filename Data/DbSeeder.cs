@@ -9,14 +9,13 @@ namespace LaptopCenter.Data
     {
         public static async Task SeedRolesAndAdminAsync(IServiceProvider service)
         {
-            //Seed Roles
+            // Seed Roles
             var userManager = service.GetService<UserManager<AppUser>>();
             var roleManager = service.GetService<RoleManager<IdentityRole>>();
             await roleManager.CreateAsync(new IdentityRole(ERole.Admin.ToString()));
             await roleManager.CreateAsync(new IdentityRole(ERole.User.ToString()));
 
-            // creating admin
-
+            // Creating admin
             var admin = new AppUser
             {
                 UserName = "admin@gmail.com",
@@ -25,7 +24,7 @@ namespace LaptopCenter.Data
                 Gender = true,
                 Birthday = DateTime.Now,
                 Address = "Admin",
-                Telephone = "0987654321",
+                PhoneNumber = "0987654321",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };

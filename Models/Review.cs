@@ -7,12 +7,16 @@ namespace LaptopCenter.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         [Required]
         [StringLength(1000, ErrorMessage = "Comment cannot exceed 1000 characters.")]
         public string Comment { get; set; }
+
         public DateTime Date { get; set; }
+
         [Required]
         public int Rate { get; set; }
+
         public string UserId { get; set; }
         
         [Required]

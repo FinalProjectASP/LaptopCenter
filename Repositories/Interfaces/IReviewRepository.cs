@@ -7,6 +7,8 @@ namespace LaptopCenter.Repositories.Interfaces
     {
         List<Review> GetReviewsByProductId(int productId);
         List<Review> GetReviewByProductId(int productId, string userId);
+        List<Review> GetReviews();
+        Review GetReviewById(int reviewId);
         string SaveReview(Review review);
         void UpdateReview(Review review);
         void RemoveReview(Review review);

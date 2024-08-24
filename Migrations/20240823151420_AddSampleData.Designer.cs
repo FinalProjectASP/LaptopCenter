@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopCenter.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240821163013_identityUser")]
-    partial class identityUser
+    [Migration("20240823151420_AddSampleData")]
+    partial class AddSampleData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,6 +149,23 @@ namespace LaptopCenter.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Electronics"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Computers"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Smartphones"
+                        });
                 });
 
             modelBuilder.Entity("LaptopCenter.Models.Order", b =>
@@ -290,6 +307,198 @@ namespace LaptopCenter.Migrations
                     b.HasIndex("SupplierId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CPU = "Exynos 2100",
+                            CategoryId = 3,
+                            CreateAt = new DateTime(2022, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about Samsung Galaxy S21",
+                            GraphicsCard = "128GB",
+                            Image = "laptop-msi.jpg",
+                            IsSale = true,
+                            Price = 799.99m,
+                            ProductName = "Samsung Galaxy S21",
+                            Quantity = 50,
+                            RAM = "8GB",
+                            ScreenSize = "6.2 inches",
+                            ShortDescription = "Latest Samsung smartphone",
+                            SupplierId = 1,
+                            WarrantyPeriod = "2 years"
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CPU = "M1",
+                            CategoryId = 2,
+                            CreateAt = new DateTime(2022, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about Apple MacBook Pro",
+                            GraphicsCard = "512GB",
+                            Image = "laptop-microsoft.png",
+                            IsSale = true,
+                            Price = 1299.99m,
+                            ProductName = "Apple MacBook Pro",
+                            Quantity = 30,
+                            RAM = "16GB",
+                            ScreenSize = "13 inches",
+                            ShortDescription = "High-performance laptop",
+                            SupplierId = 2,
+                            WarrantyPeriod = "1 year"
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CPU = "Intel i7",
+                            CategoryId = 2,
+                            CreateAt = new DateTime(2022, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about Dell XPS 13",
+                            GraphicsCard = "1TB",
+                            Image = "laptop-accer.png",
+                            IsSale = false,
+                            Price = 999.99m,
+                            ProductName = "Dell XPS 13",
+                            Quantity = 20,
+                            RAM = "16GB",
+                            ScreenSize = "13.4 inches",
+                            ShortDescription = "Compact and powerful laptop",
+                            SupplierId = 3,
+                            WarrantyPeriod = "1 year"
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            CPU = "Intel i7",
+                            CategoryId = 2,
+                            CreateAt = new DateTime(2022, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about HP Spectre x360",
+                            GraphicsCard = "1TB",
+                            Image = "laptop-hp.jpg",
+                            IsSale = true,
+                            Price = 1099.99m,
+                            ProductName = "HP Spectre x360",
+                            Quantity = 25,
+                            RAM = "16GB",
+                            ScreenSize = "13.3 inches",
+                            ShortDescription = "Convertible laptop",
+                            SupplierId = 4,
+                            WarrantyPeriod = "1 year"
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            CPU = "Intel i7",
+                            CategoryId = 2,
+                            CreateAt = new DateTime(2022, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about Lenovo ThinkPad X1 Carbon",
+                            GraphicsCard = "512GB",
+                            Image = "laptop-microsoft.png",
+                            IsSale = true,
+                            Price = 1499.99m,
+                            ProductName = "Lenovo ThinkPad X1 Carbon",
+                            Quantity = 15,
+                            RAM = "16GB",
+                            ScreenSize = "14 inches",
+                            ShortDescription = "Business laptop",
+                            SupplierId = 5,
+                            WarrantyPeriod = "3 years"
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            CPU = "Snapdragon 865+",
+                            CategoryId = 1,
+                            CreateAt = new DateTime(2022, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about Samsung Galaxy Tab S7",
+                            GraphicsCard = "128GB",
+                            Image = "laptop-hp.jpg",
+                            IsSale = false,
+                            Price = 649.99m,
+                            ProductName = "Samsung Galaxy Tab S7",
+                            Quantity = 40,
+                            RAM = "6GB",
+                            ScreenSize = "11 inches",
+                            ShortDescription = "High-end tablet",
+                            SupplierId = 1,
+                            WarrantyPeriod = "1 year"
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            CPU = "A15 Bionic",
+                            CategoryId = 3,
+                            CreateAt = new DateTime(2022, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about Apple iPhone 13",
+                            GraphicsCard = "128GB",
+                            Image = "laptop-accer.png",
+                            IsSale = true,
+                            Price = 599.99m,
+                            ProductName = "Apple iPhone 13",
+                            Quantity = 100,
+                            RAM = "4GB",
+                            ScreenSize = "6.1 inches",
+                            ShortDescription = "Latest Apple smartphone",
+                            SupplierId = 2,
+                            WarrantyPeriod = "1 year"
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            CPU = "Intel i5",
+                            CategoryId = 2,
+                            CreateAt = new DateTime(2022, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about Dell Inspiron 15",
+                            GraphicsCard = "256GB",
+                            Image = "laptop-hp.jpg",
+                            IsSale = false,
+                            Price = 399.99m,
+                            ProductName = "Dell Inspiron 15",
+                            Quantity = 10,
+                            RAM = "8GB",
+                            ScreenSize = "15.6 inches",
+                            ShortDescription = "Affordable laptop",
+                            SupplierId = 3,
+                            WarrantyPeriod = "1 year"
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            CPU = "Intel i7",
+                            CategoryId = 2,
+                            CreateAt = new DateTime(2022, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about HP Envy 13",
+                            GraphicsCard = "512GB",
+                            Image = "laptop-microsoft.png",
+                            IsSale = true,
+                            Price = 899.99m,
+                            ProductName = "HP Envy 13",
+                            Quantity = 35,
+                            RAM = "16GB",
+                            ScreenSize = "13.3 inches",
+                            ShortDescription = "Portable laptop",
+                            SupplierId = 4,
+                            WarrantyPeriod = "1 year"
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            CPU = "Intel i5",
+                            CategoryId = 2,
+                            CreateAt = new DateTime(2022, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DetailDescription = "Full details about Lenovo Yoga 7i",
+                            GraphicsCard = "256GB",
+                            Image = "laptop-microsoft.png",
+                            IsSale = true,
+                            Price = 799.99m,
+                            ProductName = "Lenovo Yoga 7i",
+                            Quantity = 20,
+                            RAM = "8GB",
+                            ScreenSize = "14 inches",
+                            ShortDescription = "Convertible laptop",
+                            SupplierId = 5,
+                            WarrantyPeriod = "1 year"
+                        });
                 });
 
             modelBuilder.Entity("LaptopCenter.Models.Review", b =>
@@ -350,6 +559,38 @@ namespace LaptopCenter.Migrations
                     b.HasKey("SupplierId");
 
                     b.ToTable("Suppliers");
+
+                    b.HasData(
+                        new
+                        {
+                            SupplierId = 1,
+                            LogoUrl = "laptop-msi.jpg",
+                            SupplierName = "MSI"
+                        },
+                        new
+                        {
+                            SupplierId = 2,
+                            LogoUrl = "laptop-accer.png",
+                            SupplierName = "Acer"
+                        },
+                        new
+                        {
+                            SupplierId = 3,
+                            LogoUrl = "laptop-microsoft.png",
+                            SupplierName = "Microsoft"
+                        },
+                        new
+                        {
+                            SupplierId = 4,
+                            LogoUrl = "laptop-hp.png",
+                            SupplierName = "HP"
+                        },
+                        new
+                        {
+                            SupplierId = 5,
+                            LogoUrl = "laptop-microsoft.png",
+                            SupplierName = "Microsoft"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

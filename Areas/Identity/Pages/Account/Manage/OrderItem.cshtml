@@ -1,0 +1,106 @@
+﻿@page
+@model OrderItemModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.OrderItem;
+}
+
+<div class="cart_items order-profile">
+    <div class="cart_title">
+        Your order
+        <small> (@Model.ListOrders.Count item(s))</small>
+    </div>
+    @if (Model.ListOrders != null && Model.ListOrders.Count > 0)
+    {
+        @for (int i = 0; i < Model.ListOrders.Count; i++)
+        {
+            var statusClass = "";
+            var status = (EStatus)Model.ListOrders[i].Order.Status;
+
+            switch (status)
+            {
+                case EStatus.Pending:
+                    statusClass = "text-warning alert alert-warning"; // yellow for pending
+                    break;
+                case EStatus.Processing:
+                    statusClass = "text-info alert alert-info"; // blue for processing
+                    break;
+                case EStatus.Completed:
+                    statusClass = "text-success alert alert-success"; // green for completed
+                    break;
+            }
+
+            <ul class="cart_list ps-0">
+                <li class="alert p-2 w-100 mb-0 @statusClass" role="alert">
+                    <h6 class="mb-0"><b>@status</b></h6>
+                    <p class="hidden-sm-down mb-0">
+                        Est. delivery between
+                        @Model.ListOrders[i].Order.OrderDate.ToString("MMMM dd") –
+                        @Model.ListOrders[i].Order.DeliveryDate.ToString("MMMM dd, yyyy")
+                    </p>
+                    <div class="cart_info_col text-end" onclick="toggleInfo(@Model.ListOrders[i].Order.OrderId)">
+                        <a id="btn-@Model.ListOrders[i].Order.OrderId" class="btn btn-sm btn-warning seemore_btn">See more</a>
+                    </div>
+                </li>
+                <li class="ps-2" id="show-@Model.ListOrders[i].Order.OrderId" style="display: none;">
+                    <h6 class="mb-0 mt-3">
+                        <b>Customer Name:</b>
+                        @Model.ListOrders[i].Order.CustomerName
+                    </h6>
+                    <h6 class="mb-0 mt-2">
+                        <b>Customer Phone:</b>
+                        @Model.ListOrders[i].Order.CustomerPhone
+                    </h6>
+                    <h6 class="mb-0 mt-2">
+                        <b>Delivery Local:</b>
+                        @Model.ListOrders[i].Order.DeleveryLocal
+                    </h6>
+                </li>
+                @foreach (var item in Model.ListOrders[i].Details)
+                {
+                    <li class="cart_item ps-4 clearfix">
+                        <div class="cart_item_image">
+                            <img src="~/img/products/@item.Product.ProductImage" alt="Product Image">
+                        </div>
+                        <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                            <div class="cart_item_name cart_info_col">
+                                <div class="cart_item_title">Name</div>
+                                <div class="cart_item_text cart_name">@item.Product.ProductName</div>
+                            </div>
+                            <div class="cart_item_price cart_info_col">
+                                <div class="cart_item_title">Price</div>
+                                <div class="cart_item_text cart_price">$@item.Product.Price</div>
+                            </div>
+                            <div class="cart_item_quantity cart_info_col">
+                                <div class="cart_item_title">Quantity</div>
+                                <div class="cart_item_text cart_price">@item.OrderDetail.Quantity</div>
+                            </div>
+                        </div>
+                    </li>
+                }
+                <li>
+                    <h6 class="margin_total text-end">
+                        <b>Total:</b>
+                        $@Model.ListOrders[i].Order.Total
+                    </h6>
+                </li>
+            </ul>
+        }
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function toggleInfo(orderId) {
+            var infoElement = document.getElementById('show-' + orderId);
+            var btn = document.getElementById('btn-' + orderId);
+
+            if (infoElement.style.display === "none") {
+                infoElement.style.display = "block";
+                btn.textContent = "See less";
+            } else {
+                infoElement.style.display = "none";
+                btn.textContent = "See more";
+            }
+        }
+    </script>
+}

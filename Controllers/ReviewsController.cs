@@ -10,38 +10,39 @@ using LaptopCenter.Models;
 using LaptopCenter.Repositories.Interfaces;
 using Microsoft.CodeAnalysis;
 using LaptopCenter.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace LaptopCenter.Controllers
 {
+    [Authorize(Roles = "User")]
     public class ReviewsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IReviewRepository _reviewRepository;
 
-        public ReviewsController(ApplicationDbContext context, IReviewRepository reviewRepository)
+        public ReviewsController(UserManager<AppUser> userManager, IReviewRepository reviewRepository)
         {
-            _context = context;
+            _userManager = userManager;
             _reviewRepository = reviewRepository;
         }
 
         // GET: Reviews
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Reviews.Include(r => r.Product);
-            return View(await applicationDbContext.ToListAsync());
+            List<Review> reviews = _reviewRepository.GetReviews();
+            return View(reviews);
         }
 
         // GET: Reviews/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null || _context.Reviews == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var review = await _context.Reviews
-                .Include(r => r.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var review = _reviewRepository.GetReviewById(id);
             if (review == null)
             {
                 return NotFound();
@@ -59,35 +60,33 @@ namespace LaptopCenter.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateReview(int productId, int orderId, int rate, string comment)
+        public IActionResult CreateReview([FromForm] Review reviewObj)
         {
             // Validate inputs
-            if (productId <= 0 || orderId <= 0 || rate < 1 || rate > 5 || string.IsNullOrWhiteSpace(comment))
+            if (reviewObj.Rate < 1 || reviewObj.Rate > 5)
             {
                 ModelState.AddModelError("", "Invalid input");
-                return View(); // return the view with validation errors
+                return RedirectToAction("Create"); // return the view with validation errors
             }
-            Review review = new()
+
+            string userId = _userManager.GetUserId(User);
+
+            reviewObj.Date = DateTime.Now;
+            reviewObj.UserId = userId;
+
+            if (reviewObj != null)
             {
-                ProductId = productId,
-                OrderId = orderId,
-                Rate = rate,
-                Comment = comment,
-                Date = DateTime.Now,
-                UserId= "trannq"// or other appropriate date
-            };
-            if (review != null)
-            {
-                _reviewRepository.SaveReview(review);
-                return Json(new { success = true });
+                _reviewRepository.SaveReview(reviewObj);
+                return LocalRedirect("~/Identity/Account/Manage");
             }
-            return Json(new { success = false, message = "Review item add failt." });            
+
+            return Json(new { success = false, message = "Review item add failt." });
         }
 
         // GET: Reviews/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Reviews == null)
+            /*if (id == null)
             {
                 return NotFound();
             }
@@ -98,7 +97,8 @@ namespace LaptopCenter.Controllers
                 return NotFound();
             }
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", review.ProductId);
-            return View(review);
+            return View(review);*/
+            return View();
         }
 
         // POST: Reviews/Edit/5
@@ -108,7 +108,7 @@ namespace LaptopCenter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Comment,Rate,ProductId")] Review review)
         {
-            if (id != review.Id)
+            /*if (id != review.Id)
             {
                 return NotFound();
             }
@@ -135,20 +135,20 @@ namespace LaptopCenter.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", review.ProductId);
-            return View(review);
+            return View(review);*/
+
+            return View();
         }
 
         // GET: Reviews/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null || _context.Reviews == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var review = await _context.Reviews
-                .Include(r => r.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var review = _reviewRepository.GetReviewById(id);
             if (review == null)
             {
                 return NotFound();
@@ -162,23 +162,13 @@ namespace LaptopCenter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Reviews == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Reviews'  is null.");
-            }
-            var review = await _context.Reviews.FindAsync(id);
+            var review = _reviewRepository.GetReviewById(id);
             if (review != null)
             {
-                _context.Reviews.Remove(review);
+                _reviewRepository.RemoveReview(review);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
-        private bool ReviewExists(int id)
-        {
-          return (_context.Reviews?.Any(e => e.Id == id)).GetValueOrDefault();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

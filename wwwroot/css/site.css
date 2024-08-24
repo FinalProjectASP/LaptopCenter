@@ -62,91 +62,16 @@ a {
     z-index: 99;
 }
 
-
-/*** Button Start ***/
-.btn {
-    font-weight: 600;
-    transition: .5s;
-}
-
-.btn-square {
-    width: 32px;
-    height: 32px;
-}
-
-.btn-sm-square {
-    width: 34px;
-    height: 34px;
-}
-
-.btn-md-square {
-    width: 44px;
-    height: 44px;
-}
-
-.btn-lg-square {
-    width: 56px;
-    height: 56px;
-    display: flex !important;
-}
-
-.btn-xl-square {
-    width: 66px;
-    height: 66px;
-}
-
-.btn-square,
-.btn-sm-square,
-.btn-md-square,
-.btn-lg-square,
-.btn-xl-square {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: normal;
-}
-
-.btn.btn-primary {
-    color: var(--bs-white);
-    border: none;
-}
-
-    .btn.btn-primary:hover {
-        background: var(--bs-dark);
-        color: var(--bs-white);
-    }
-
-.btn.btn-light {
-    color: var(--bs-primary);
-    border: none;
-}
-
-    .btn.btn-light:hover {
-        color: var(--bs-white);
-        background: var(--bs-dark);
-    }
-
-.btn.btn-dark {
-    color: var(--bs-white);
-    border: none;
-}
-
-    .btn.btn-dark:hover {
-        color: var(--bs-primary);
-        background: var(--bs-light);
-    }
-
 /*** Navbar Start ***/
 .header {
-    background-color: #021253;
+    background-color: #021253 !important;
 }
 
 .navbar-brand img {
     width: 100px;
 }
 
-.nav-item .nav-link {
+.nav-custom .nav-item .nav-link {
     color: white !important;
 }
 
@@ -160,7 +85,7 @@ a {
     margin: 0 auto; /* Center the search bar */
 }
 
-    .form .fa-search {
+    .form .fa-magnifying-glass {
         position: absolute;
         top: 13px;
         left: 20px;
@@ -1711,8 +1636,8 @@ body {
         color: #ff5a49;
         cursor: pointer;
         margin-bottom: 10px;
-        margin-left: 10px;
-        padding: 10px;
+        width: 400px;
+        height: 100px;
     }
 
         .feedback-tags .tag.choosed {
@@ -2738,7 +2663,7 @@ hr {
     padding-top: 2px;
 }
 
-.increment-btn.image-1 :hover, a:hover {
+.increment-btn.image-1:hover {
     background-color: transparent;
     padding-top: 2px;
 }
@@ -2938,7 +2863,6 @@ hr {
     background-color: white;
 }
 
-.btn-lg,
 .form-control-sm:focus,
 .form-control-sm:active,
 a:focus,
@@ -2950,35 +2874,6 @@ a:active {
 .form-control-sm:focus {
     border: 1.5px solid #4bb8a9;
 }
-
-.btn-lg,
-.btn-group-lg > .btn {
-    padding: 0.5rem 0.1rem;
-    font-size: 1rem;
-    border-radius: 0;
-    color: white !important;
-    background-color: #4bb8a9;
-    height: 2.8rem !important;
-    border-radius: 0.2rem !important;
-}
-
-    .btn-lg:hover,
-    .btn-group-lg > .btn:hover {
-        background-color: #26A69A;
-    }
-
-.btn-outline-primary {
-    background-color: #fff !important;
-    color: #4bb8a9 !important;
-    border-radius: 0.2rem !important;
-    border: 1px solid #4bb8a9;
-}
-
-    .btn-outline-primary:hover {
-        background-color: #4bb8a9 !important;
-        color: #fff !important;
-        border: 1px solid #4bb8a9;
-    }
 
 .card-margin-top {
     margin-top: 40px !important;
@@ -4451,3 +4346,63 @@ textarea.input {
 }
 
 
+/* From Uiverse.io by satyamchaudharydev */
+.btn-cart {
+    --primary-color: #645bff;
+    --secondary-color: #fff;
+    --hover-color: #111;
+    --arrow-width: 10px;
+    --arrow-stroke: 2px;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 20px;
+    color: var(--secondary-color);
+    padding: 1em 1.8em;
+    background: var(--primary-color);
+    display: flex;
+    transition: 0.2s background;
+    align-items: center;
+    gap: 0.6em;
+    font-weight: bold;
+}
+
+    .btn-cart .arrow-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-cart .arrow {
+        margin-top: 1px;
+        width: var(--arrow-width);
+        background: var(--primary-color);
+        height: var(--arrow-stroke);
+        position: relative;
+        transition: 0.2s;
+    }
+
+        .btn-cart .arrow::before {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            border: solid var(--secondary-color);
+            border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+            display: inline-block;
+            top: -3px;
+            right: 3px;
+            transition: 0.2s;
+            padding: 3px;
+            transform: rotate(-45deg);
+        }
+
+    .btn-cart:hover {
+        background-color: var(--hover-color);
+    }
+
+        .btn-cart:hover .arrow {
+            background: var(--secondary-color);
+        }
+
+            .btn-cart:hover .arrow:before {
+                right: 0;
+            }

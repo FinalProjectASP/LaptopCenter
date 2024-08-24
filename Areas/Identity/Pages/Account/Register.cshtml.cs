@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using LaptopCenter.Constraints;
 
 namespace LaptopCenter.Areas.Identity.Pages.Account
 {
@@ -111,8 +112,8 @@ namespace LaptopCenter.Areas.Identity.Pages.Account
 
             [Required]
             [Phone(ErrorMessage = "Invalid phone number format.")]
-			[StringLength(15, MinimumLength = 10, ErrorMessage = "Telephone number must be 10 digits.")]
-			public string Telephone { get; set; }
+			[StringLength(15, MinimumLength = 10, ErrorMessage = "Phone number must be 10 digits.")]
+			public string PhoneNumber { get; set; }
 
             [Required]
             [DataType(DataType.Date, ErrorMessage = "Invalid date format. Please use YYYY-MM-DD.")]
@@ -145,7 +146,7 @@ namespace LaptopCenter.Areas.Identity.Pages.Account
                     return Page();
                 }
                 user.Address = Input.Address;
-                user.Telephone = Input.Telephone;
+                user.PhoneNumber = Input.PhoneNumber;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -153,6 +154,7 @@ namespace LaptopCenter.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, ERole.User.ToString());
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

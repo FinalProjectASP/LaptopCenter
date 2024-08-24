@@ -6,11 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LaptopCenter.Migrations
 {
     /// <inheritdoc />
-    public partial class identityUser : Migration
+    public partial class IdentityUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<int>(
+                name: "OrderId",
+                table: "Reviews",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "OrderDate",
+                table: "Orders",
+                type: "datetime2",
+                nullable: false,
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -162,6 +176,11 @@ namespace LaptopCenter.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reviews_OrderId",
+                table: "Reviews",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -199,11 +218,23 @@ namespace LaptopCenter.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Reviews_Orders_OrderId",
+                table: "Reviews",
+                column: "OrderId",
+                principalTable: "Orders",
+                principalColumn: "OrderId",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Reviews_Orders_OrderId",
+                table: "Reviews");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -224,6 +255,18 @@ namespace LaptopCenter.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Reviews_OrderId",
+                table: "Reviews");
+
+            migrationBuilder.DropColumn(
+                name: "OrderId",
+                table: "Reviews");
+
+            migrationBuilder.DropColumn(
+                name: "OrderDate",
+                table: "Orders");
         }
     }
 }

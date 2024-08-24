@@ -69,7 +69,7 @@
                     </div>
                     <div class="cart_buttons">
                         <a asp-action="Product" asp-controller="Home" type="button" class="button cart_button_clear">Continue Shopping</a>
-                        <form asp-action="CheckOut" asp-controller="Home" method="post" class="d-inline">
+                        <form asp-action="CheckOut" asp-controller="Cart" method="post" class="d-inline">
                             <button type="submit" class="button cart_button_checkout">Check out</button>
                         </form>
                     </div>
@@ -97,7 +97,7 @@
                         var prodId = parseInt($('#prod_id').val(), 10); // Ensure parsing as integer
 
                         $.ajax({
-                            url: '@Url.Action("RemoveFromCart", "Home")',
+                            url: '@Url.Action("RemoveFromCart", "Cart")',
                             type: 'POST',
                             data: {
                                 productId: prodId,
@@ -169,7 +169,7 @@
 
             function updateCartQuantity(productId, quantity) {
                 $.ajax({
-                    url: '@Url.Action("UpdateCartQuantity", "Home")',
+                    url: '@Url.Action("UpdateCartQuantity", "Cart")',
                     type: 'POST',
                     data: {
                         productId: productId,

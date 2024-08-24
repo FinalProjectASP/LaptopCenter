@@ -18,13 +18,13 @@
                                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                             </li>
                             <li class="breadcrumb-item font-weight-bold">
-                                <a asp-controller="Home" asp-action="Cart" class="black-text text-uppercase">
+                                <a asp-controller="Cart" asp-action="Index" class="black-text text-uppercase">
                                     <span class="mr-md-3 mr-1">SHOPPING BAG</span>
                                 </a>
                                 <i class="fa fa-angle-double-right text-uppercase" aria-hidden="true"></i>
                             </li>
                             <li class="breadcrumb-item font-weight-bold">
-                                <a asp-controller="Home" asp-action="CheckOut" class="black-text text-uppercase active-link">
+                                <a asp-controller="Cart" asp-action="CheckOut" class="black-text text-uppercase active-link">
                                     <span class="mr-md-3 mr-1">CHECKOUT</span>
                                 </a>        
                             </li>
@@ -32,7 +32,7 @@
                     </nav>
                 </div>
             </div>
-            <form asp-action="ProcessCheckout" method="post" class="process_checkout">
+            <form asp-controller="Cart" asp-action="ProcessCheckout" method="post" class="process_checkout">
                 <div class="row d-flex mb-5">
                     <div class="col-6 ">
                         <div class="procces_scroll">
@@ -120,7 +120,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

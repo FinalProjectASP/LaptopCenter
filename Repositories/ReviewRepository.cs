@@ -47,5 +47,17 @@ namespace LaptopCenter.Repositories
             _context.Reviews.Remove(review);
             _context.SaveChanges();
         }
+
+        public List<Review> GetReviews()
+        {
+            return _context.Reviews.Include(r => r.Product).ToList();
+        }
+
+        public Review GetReviewById(int reviewId)
+        {
+            return _context.Reviews
+                .Include(r => r.Product)
+                .FirstOrDefault(m => m.Id == reviewId);
+        }
     }
 }

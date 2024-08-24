@@ -1,9 +1,4 @@
 ﻿@using LaptopCenter.Constraints;
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
 
 <section class="my-5">
     <div class="container profile mt-0">
@@ -23,7 +18,7 @@
 
                                 <div class="cart_buttons">
                                     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                        <button id="logout" type="submit" class="button cart_button_clear">Logout</button>
+                                        <button id="logout" type="submit" class="btn btn-outline-secondary btn-lg">Logout</button>
                                     </form>
                                 </div>
                             </div>
@@ -31,28 +26,34 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <div id="tabs">
+                    @* <div id="tabs">
                         <input type="radio" id="button-1" name="tab" checked>
                         <input type="radio" id="button-2" name="tab">
                         <input type="radio" id="button-3" name="tab">
+                        <input type="radio" id="button-4" name="tab">
 
                         <ul class="tab-profile">
                             <li>
                                 <label for="button-1">Profile</label>
                             </li>
                             <li>
-                                <label for="button-2">Purchase order</label>
+                                <label for="button-2">Privacy</label>
                             </li>
                             <li>
-                                <label for="button-3">Purchase history</label>
+                                <label for="button-3">Orders Items</label>
+                            </li>
+                            <li>
+                                <label for="button-4">Purchase history</label>
                             </li>
                             <li class="bg">
+                                
                             </li>
                         </ul>
 
                         <div id="shadow">
                             <div id="content">
-                                <div id="tab-1 pt-0">
+                                <!-- Tab 1: Profile -->
+                                <div id="tab-1">
                                     <div class="card-body pt-0">
                                         <div class="row mt-4">
                                             <div class="col">
@@ -78,8 +79,14 @@
                                         </div>                                        
                                     </div>
                                 </div>
-                                <!-- Tab 2: Current Orders -->
-                                <div id="tab-2" class="order-profile p-0">
+                                <!-- Tab 2: Privacy -->
+                                <div id="tab-2">
+                                    <div class="card-body pt-0">
+                                        Privacy
+                                    </div>
+                                </div>
+                                <!-- Tab 3: Current Orders -->
+                                <div id="tab-3" class="order-profile p-0">
                                     <div class="cart_items order-profile">
                                         <div class="cart_title">
                                             Your order
@@ -164,10 +171,13 @@
                                         }
                                     </div>
                                 </div>
-
-                                <!-- Tab 3: Order History -->
-                                <div id="tab-3" class="order-profile p-0">
+                                <!-- Tab 4: Order History -->
+                                <div id="tab-4" class="order-profile p-0">
                                     <div class="cart_items order-profile">
+                                        <div class="cart_title">
+                                            Your histories
+                                            <small> (@ViewBag.History.Count item(s))</small>
+                                        </div>
                                         @if (ViewBag.History != null && ViewBag.History.Count > 0)
                                         {
                                             @for (int i = 0; i < ViewBag.History.Count; i++)
@@ -248,9 +258,28 @@
                                         }
                                     </div>
                                 </div>
-
                             </div>
                         </div>
+                    </div> *@
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-privacy-tab" data-bs-toggle="pill" data-bs-target="#pills-privacy" type="button" role="tab" aria-controls="pills-privacy" aria-selected="false">Privacy</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-orders-items-tab" data-bs-toggle="pill" data-bs-target="#pills-orders-items" type="button" role="tab" aria-controls="pills-orders-items" aria-selected="false">Orders Items</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-purchase-history-tab" data-bs-toggle="pill" data-bs-target="#pills-purchase-history" type="button" role="tab" aria-controls="pills-purchase-history" aria-selected="false">Purchase History</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="pills-privacy" role="tabpanel" aria-labelledby="pills-privacy-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="pills-orders-items" role="tabpanel" aria-labelledby="pills-orders-items-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="pills-purchase-history" role="tabpanel" aria-labelledby="pills-purchase-history-tab" tabindex="0">...</div>
                     </div>
                 </div>
             </div>

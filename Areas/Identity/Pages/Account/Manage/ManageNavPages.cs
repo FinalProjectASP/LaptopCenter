@@ -19,6 +19,13 @@ namespace  LaptopCenter.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public static string Index => "Index";
 
+        public static string Privacy => "Privacy";
+
+        public static string OrderItem => "OrderItem";
+
+        public static string PurchaseHistory => "PurchaseHistory";
+
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -66,6 +73,13 @@ namespace  LaptopCenter.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
+
+        public static string PrivacyNavClass(ViewContext viewContext) => PageNavClass(viewContext, Privacy);
+
+        public static string OrderItemNavClass(ViewContext viewContext) => PageNavClass(viewContext, OrderItem);
+
+        public static string PurchaseHistoryNavClass(ViewContext viewContext) => PageNavClass(viewContext, PurchaseHistory);
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
