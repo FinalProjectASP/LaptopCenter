@@ -3,6 +3,7 @@ using LaptopCenter.Models;
 using LaptopCenter.Repositories;
 using LaptopCenter.Repositories.Interfaces;
 using LaptopCenter.Repository;
+using LaptopCenter.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,8 @@ builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+
+builder.Services.AddScoped<IFileService, FileService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

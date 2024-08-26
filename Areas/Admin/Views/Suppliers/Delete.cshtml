@@ -29,17 +29,16 @@
                             @Html.DisplayNameFor(model => model.LogoUrl)
                         </dt>
                         <dd class="col-sm-9">
-                            @Html.DisplayFor(model => model.LogoUrl)
+                            <img src="~/img/suppliers/@Model.LogoUrl" style="width: 100px" class="rounded img-thumbnail" alt="...">
                         </dd>
-
-                        <div class="mt-4 text-center">
-                            <form asp-action="Delete">
-                                <input type="hidden" asp-for="SupplierId" />
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                                <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
-                            </form>
-                        </div>
                     </dl>
+                    <div class="mt-4 text-center">
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="SupplierId" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

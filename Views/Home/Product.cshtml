@@ -12,7 +12,7 @@
                 {
                     foreach (var product in Model)
                     {
-                        <div class="col-6 col-md-3 pb-4">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-4">
                             <div class="product-card">
                                 <form asp-controller="Cart" asp-action="AddToCart" method="post">
 									<input type="hidden" name="ProductId" value="@product.ProductId" />
@@ -25,11 +25,13 @@
                                         </a>
 
                                     </div>
+
                                     <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
                                         <div class="main-images">
                                             <img id="blue" class="blue active" src="~/img/products/@product.ProductImage" alt="blue">
                                         </div>
                                     </a>
+
                                     @{
                                         int maxNameLength = 20; // Set the maximum length for the product name
                                         int maxDescriptionLength = 50; // Set the maximum length for the short description
@@ -89,10 +91,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="price">
-
-                                                <span class="price_num">Price: $@product.Price</span>
-                                                <span class="price_letter">Nine dollar only</span>
+                                            <div class="text-dark mt-2">
+                                                <h4 class="">Price: $@product.Price</h4>
                                             </div>
                                         </a>
                                     </div>

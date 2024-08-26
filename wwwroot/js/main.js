@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    //Profile
-
-
     //Contact
     const inputs = document.querySelectorAll(".input");
 
@@ -114,56 +111,3 @@ $(document).ready(function () {
         return false;
     });
 });
-
-const loginBtn = document.getElementById('login');
-const signupBtn = document.getElementById('signup');
-
-loginBtn.addEventListener('click', (e) => {
-    let parent = e.target.parentNode.parentNode;
-    Array.from(e.target.parentNode.parentNode.classList).find((element) => {
-        if (element !== "slide-up") {
-            parent.classList.add('slide-up')
-        } else {
-            signupBtn.parentNode.classList.add('slide-up')
-            parent.classList.remove('slide-up')
-        }
-    });
-});
-
-signupBtn.addEventListener('click', (e) => {
-    let parent = e.target.parentNode;
-    Array.from(e.target.parentNode.classList).find((element) => {
-        if (element !== "slide-up") {
-            parent.classList.add('slide-up')
-        } else {
-            loginBtn.parentNode.parentNode.classList.add('slide-up')
-            parent.classList.remove('slide-up')
-        }
-    });
-});
-var quantity = document.getElementById("cart_item_title");
-if (quantity) {
-    $('.increment-btn').click(function (e) {
-        e.preventDefault();
-
-        var inc_value = $(this).closest('.product_data').find('.qty-input').val();
-        var value = parseInt(inc_value, 10);
-        value = isNaN(value) ? 0 : value;
-        if (value < 10) {
-            value++;
-            $(this).closest('.product_data').find('.qty-input').val(value);
-        }
-    });
-
-    $('.decrement-btn').click(function (e) {
-        e.preventDefault();
-
-        var dec_value = $(this).closest('.product_data').find('.qty-input').val();
-        var value = parseInt(dec_value, 10);
-        value = isNaN(value) ? 0 : value;
-        if (value > 1) {
-            value--;
-            $(this).closest('.product_data').find('.qty-input').val(value);
-        }
-    });
-}

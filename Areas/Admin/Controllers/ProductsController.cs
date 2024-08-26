@@ -71,8 +71,13 @@ namespace LaptopCenter.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", product.CategoryId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "LogoUrl", product.SupplierId);
+
+            var categories = await _categoryRepository.GetCategories();
+            var suppliers = await _supplierRepository.GetSuppliers();
+
+            ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
+            ViewBag.Suppliers = new SelectList(suppliers, "SupplierId", "SupplierName");
+
             return View(product);
         }
 
@@ -89,8 +94,13 @@ namespace LaptopCenter.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", product.CategoryId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "LogoUrl", product.SupplierId);
+
+            var categories = await _categoryRepository.GetCategories();
+            var suppliers = await _supplierRepository.GetSuppliers();
+
+            ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
+            ViewBag.Suppliers = new SelectList(suppliers, "SupplierId", "SupplierName");
+
             return View(product);
         }
 
@@ -124,8 +134,13 @@ namespace LaptopCenter.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", product.CategoryId);
-            ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "LogoUrl", product.SupplierId);
+
+            var categories = await _categoryRepository.GetCategories();
+            var suppliers = await _supplierRepository.GetSuppliers();
+
+            ViewBag.Categories = new SelectList(categories, "CategoryId", "CategoryName");
+            ViewBag.Suppliers = new SelectList(suppliers, "SupplierId", "SupplierName");
+
             return View(product);
         }
 

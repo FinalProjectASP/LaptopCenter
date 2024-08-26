@@ -4,45 +4,37 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container mt-4">
-    <h1 class="mb-4">Supplier List</h1>
+<div>
+    <h1 class="text-center">Suppliers List</h1>
 
-    <p>
-        <a asp-action="Create" class="btn btn-primary mb-3">Create New</a>
+    <p class="text-end">
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
     </p>
 
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SupplierName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.LogoUrl)
-                        </th>
-                        <th class="text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SupplierName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LogoUrl)
-                            </td>
-                            <td class="text-center">
-                                <a asp-action="Edit" asp-route-id="@item.SupplierId" class="btn btn-warning btn-sm">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@item.SupplierId" class="btn btn-danger btn-sm ms-2">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SupplierName)</th>
+                <th>@Html.DisplayNameFor(model => model.LogoUrl)</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SupplierName)
+                    </td>
+                    <td>
+                        <img src="~/img/suppliers/@item.LogoUrl" style="width: 100px" class="rounded img-thumbnail" alt="...">
+                    </td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@item.SupplierId" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.SupplierId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

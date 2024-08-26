@@ -4,122 +4,106 @@
     ViewBag.Title = "Checkout";
 }
 
-<div class=" row justify-content-center mb-md-0 mb-5">
-    <div class="mx-5 checkout">
+<div class="mb-md-0 mb-5">
+    <div class="container mt-4">
         <div class="card shadow-lg">
-            <div class="row mx-auto justify-content-center text-center">
-                <div class="col-12 mt-3">
-                    <nav aria-label="breadcrumb" class="second">
-                        <ol class="breadcrumb indigo lighten-6 background-white">
-                            <li class="breadcrumb-item font-weight-bold">
-                                <a asp-controller="Home" asp-action="Product" class="black-text text-uppercase">
-                                    <span class="mr-md-3 mr-1">BACK TO SHOP</span>
-                                </a>
-                                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                            </li>
-                            <li class="breadcrumb-item font-weight-bold">
-                                <a asp-controller="Cart" asp-action="Index" class="black-text text-uppercase">
-                                    <span class="mr-md-3 mr-1">SHOPPING BAG</span>
-                                </a>
-                                <i class="fa fa-angle-double-right text-uppercase" aria-hidden="true"></i>
-                            </li>
-                            <li class="breadcrumb-item font-weight-bold">
-                                <a asp-controller="Cart" asp-action="CheckOut" class="black-text text-uppercase active-link">
-                                    <span class="mr-md-3 mr-1">CHECKOUT</span>
-                                </a>        
-                            </li>
-                        </ol>
-                    </nav>
+            <div class="card-body">
+                <div class="row mx-auto justify-content-center text-center">
+                    <div class="col-12 mt-3">
+                        <nav aria-label="breadcrumb" class="second">
+                            <ol class="breadcrumb indigo lighten-6 background-white justify-content-center">
+                                <li class="breadcrumb-item font-weight-bold">
+                                    <a asp-controller="Home" asp-action="Product" class="black-text text-uppercase">
+                                        <span class="mr-md-3 mr-1">BACK TO SHOP</span>
+                                    </a>
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                </li>
+                                <li class="breadcrumb-item font-weight-bold">
+                                    <a asp-controller="Cart" asp-action="Index" class="black-text text-uppercase">
+                                        <span class="mr-md-3 mr-1">SHOPPING BAG</span>
+                                    </a>
+                                    <i class="fa fa-angle-double-right text-uppercase" aria-hidden="true"></i>
+                                </li>
+                                <li class="breadcrumb-item font-weight-bold">
+                                    <a asp-controller="Cart" asp-action="CheckOut" class="black-text text-uppercase active-link">
+                                        <span class="mr-md-3 mr-1">CHECKOUT</span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-            <form asp-controller="Cart" asp-action="ProcessCheckout" method="post" class="process_checkout">
-                <div class="row d-flex mb-5">
-                    <div class="col-6 ">
-                        <div class="procces_scroll">
+                <form asp-controller="Cart" asp-action="ProcessCheckout" method="post">
+                    <div class="row d-flex mb-5">
+                        <div class="col-6 ">
                             <div class="cart_title mb-5">
                                 Your Cart
                                 <small> (@Model.Count() item(s)) </small>
                             </div>
-                            @foreach (var item in Model)
-                            {
-                                <div class="details shadow">
-                                    <div class="details__item">
-                                        <div class="item__image">
-                                            <img src="~/img/products/@item.Product.Image" alt="Product Image" class="laptop">
-                                        </div>
-                                        <div class="item__details">
-                                            <div class="item__title">
-                                                @item.Product.ProductName
+                            <div class="procces_scroll">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="details shadow">
+                                        <div class="details__item">
+                                            <div class="item__image">
+                                                <img src="~/img/products/@item.Product.Image" alt="Product Image" class="laptop">
                                             </div>
-                                            <div class="item__price">
-                                                $@item.Product.Price
-                                            </div>
-                                            <div class="item__quantity">
-                                                Quantity: @item.Quantity
+                                            <div class="item__details">
+                                                <div class="item__title">
+                                                    @item.Product.ProductName
+                                                </div>
+                                                <div class="item__price">
+                                                    $@item.Product.Price
+                                                </div>
+                                                <div class="item__quantity">
+                                                    Quantity: @item.Quantity
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            }
-                        </div>
-
-                        <div class="mobile_checkout row ps-1 d-block">
-                            <div class="order_total border-0 col-12">
-                                <div class="order_total_title text-danger">Order Total:</div>
-                                <input type="hidden" name="total" readonly value="@Model.Sum(x => x.Product.Price * x.Quantity)" />
-                                <div class="order_total_amount">$@Model.Sum(x => x.Product.Price * x.Quantity)</div>
+                                }
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="container">
-                            <div class="payment">
-                                <div class="payment__info">
-                                    <div class="payment__cc">
-                                        <div class="cart_title mb-3">
-                                            Your Personal Information
-                                        </div>
 
-                                        <div class="form__cc">
-                                            <div class="row">
-                                                <div class="field">
-                                                    <div class="title">
-                                                        Full name
-                                                    </div>
-                                                    <input type="text" name="customerName" class="input txt" required />
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="field">
-                                                    <div class="title">
-                                                        Phone Number
-                                                    </div>
-                                                    <input type="text" name="customerPhone" class="input txt" required />
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="field">
-                                                    <div class="title">
-                                                        Address
-                                                    </div>
-                                                    <input type="text" name="address" class="input txt" required />
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="cart_buttons">
-                                            <a asp-action="Product" asp-controller="Home" type="button" class="button cart_button_clear">Continue Shopping</a>
-                                            <button type="submit" class="button cart_button_checkout">Payment</button>
-                                        </div>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <div class="d-flex gap-4">
+                                        <div class="text-danger">Order Total:</div>
+                                        <input type="hidden" name="total" readonly value="@Model.Sum(x => x.Product.Price * x.Quantity)" />
+                                        <div class="fw-bold">$@Model.Sum(x => x.Product.Price * x.Quantity)</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="container pt-3">
+                                <div class="cart_title mb-3">
+                                    Your Personal Information
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="customerName" id="customerName" placeholder="Full name" />
+                                    <label for="customerName">Full name</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="customerPhone" id="customerPhone" placeholder="Phone number" />
+                                    <label for="customerPhone">Phone number</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" name="address" id="address" style="height: 100px" placeholder="Address"></textarea>
+                                    <label for="address">Address</label>
+                                </div>
+
+                                <div class="cart_buttons">
+                                    <a asp-action="Product" asp-controller="Home" type="button" class="btn btn-outline-secondary btn-lg">Continue Shopping</a>
+                                    <button type="submit" class="btn btn-dark btn-lg">Payment</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

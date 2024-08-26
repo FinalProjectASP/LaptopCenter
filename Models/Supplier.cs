@@ -9,16 +9,17 @@ namespace LaptopCenter.Models
         public int SupplierId { get; set; }
 
 
-        [Display(Name = "Supplier Name")]
+        [Display(Name = "Name")]
         [StringLength(100, ErrorMessage = "Supplier Name cannot exceed 100 characters.")]
         public string SupplierName { get; set; }
 
 
-        [Display(Name = "Supplier Logo URL")]
+        [Display(Name = "Logo")]
         [Required(ErrorMessage = "Logo URL is required.")]
         public string? LogoUrl{ get; set; }
 
         [NotMapped]
+        [Display(Name = "Upload Image")]
         public IFormFile? LogoFile { get; set; }
 
         public ICollection<Product>? Products { get; set; }

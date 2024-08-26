@@ -5,6 +5,7 @@ using LaptopCenter.Models;
 using LaptopCenter.Repositories;
 using LaptopCenter.Repositories.Interfaces;
 using LaptopCenter.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -14,21 +15,35 @@ namespace LaptopCenter.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<AppUser> _userManager;
         private readonly IProductRepository _productRepository;
         private readonly IReviewRepository _reviewRepository;
 
+
         public HomeController(
+            UserManager<AppUser> userManager,
             IProductRepository productRepository,
             IReviewRepository reviewRepository
         )
         {
+            _userManager = userManager;
             _productRepository = productRepository;
             _reviewRepository = reviewRepository;
-
         }
 
         public async Task<IActionResult> Index()
         {
+            AppUser appUser = await _userManager.GetUserAsync(User);
+            if (appUser != null)
+            {
+                var role = await _userManager.GetRolesAsync(appUser);
+
+                if (role[0] == ERole.Admin.ToString())
+                {
+                    return LocalRedirect(Url.Content("~/Admin/Categories/Index"));
+                }
+            }
+
             List<ProductsDTO> getLatestProducts = (List<ProductsDTO>)await _productRepository.GetLatestProducts();
             List<ProductsDTO> topSellingProducts = (List<ProductsDTO>)await _productRepository.GetTopSellingProducts();
 

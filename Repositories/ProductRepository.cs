@@ -16,6 +16,7 @@ namespace LaptopCenter.Repository
         {
             _context = context;
         }
+
         public async Task<IEnumerable<ProductsDTO>> GetLatestProducts()
         {
             try

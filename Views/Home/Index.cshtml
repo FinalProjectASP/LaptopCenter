@@ -29,7 +29,6 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-
 <!-- Carousel End -->
 
 <div class="container">
@@ -39,8 +38,7 @@
         {
             foreach (var product in ViewBag.LatestProducts)
             {
-
-                <div class="card">
+                <div class="card card-custom">
                      <img src="~/img/products/@product.ProductImage" alt="" class="product_img">
 
                     @{
@@ -95,8 +93,10 @@
         else
         {
             <div class="card">
-                <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
-                <p class="pb-3" colspan="5">No products here!</p>
+               <div class="card-body text-center">
+                    <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
+                    <p class="pb-3" colspan="5">No products here!</p>
+               </div>
             </div>
         }
     </div>
@@ -189,10 +189,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="price">
-
-                                                <span class="price_num">Price: $@product.Price</span>
-                                                <span class="price_letter">Nine dollar only</span>
+                                            <div class="text-dark mt-2">
+                                                <h4 class="">Price: $@product.Price</h4>
                                             </div>
                                         </a>
                                     </div>
@@ -208,8 +206,10 @@
                 else
                 {
                     <div class="card">
-                        <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
-                        <p class="pb-3" colspan="5">No products here!</p>
+                        <div class="card-body text-center">
+                            <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
+                            <p class="pb-3" colspan="5">No products here!</p>
+                        </div>
                     </div>
                 }
             </div>

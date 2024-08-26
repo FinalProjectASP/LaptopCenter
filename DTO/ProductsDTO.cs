@@ -1,6 +1,7 @@
 ﻿using LaptopCenter.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LaptopCenter.DTO
 {
@@ -9,7 +10,7 @@ namespace LaptopCenter.DTO
         [Display(Name = "Product ID")]
         public int ProductId { get; set; }
 
-        [Display(Name = "Product Name")]
+        [Display(Name = "Name")]
         public string ProductName { get; set; }
 
         [Display(Name = "Short Description")]
@@ -42,10 +43,12 @@ namespace LaptopCenter.DTO
         [Display(Name = "Created At")]
         public DateTime? CreateAt { get; set; }
 
-        [Display(Name = "Product Image")]
+        [Display(Name = "Image")]
         public string? ProductImage { get; set; }
 
-        public string? ImageFile { get; set; }
+        [NotMapped]
+        [Display(Name = "Upload Image")]
+        public IFormFile? ImageFile { get; set; }
 
         [Display(Name = "Price")]
         public decimal Price { get; set; }
@@ -53,6 +56,7 @@ namespace LaptopCenter.DTO
         [Display(Name = "Category Name")]
         public Category? Category { get; set; }
 
+        [Display(Name = "Supplier Name")]
         public Supplier? Supplier { get; set; }
 
         [Display(Name = "Average Rate")]
