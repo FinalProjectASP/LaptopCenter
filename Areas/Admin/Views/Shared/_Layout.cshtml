@@ -36,48 +36,48 @@
 <body>
     <main>
         @* <section class="row">
-            <div class="col-lg-2 col-md-3 pe-0">
-                <!-- Navbar -->
-                <nav class="navbar navbar-expand-md bg-light navbar-light justify-content-center">
-                    <!-- Toggle button -->
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        <div class="col-lg-2 col-md-3 pe-0">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-md bg-light navbar-light justify-content-center">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu">
+        <span class="navbar-toggler-icon"></span>
+        </button>
 
-                    <!-- Brand -->
+        <!-- Brand -->
 
-                    <a class="nav-link px-0 text-info" asp-area="Admin" asp-controller="Categories" asp-action="Index">
-                        <h3 class="fw-bold">Administrator</h3>
-                    </a>
-                </nav>
-                <!-- Navbar -->
-                <nav id="sidebarMenu" class="collapse d-md-block bg-white">
-                    <div class="position-sticky">
-                        <div class="list-group list-group-flush">
-                            <a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Categories" asp-action="Index">Category management</a>
-                            <a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">Supplier management</a>
-                            <a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Products" asp-action="Index">Product management</a>
-                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" onsubmit="return confirm('Are you sure to log out?')">
-                                <button type="submit" class="list-group-item list-group-item-action py-4 bg-info text-light">Logout</button>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+        <a class="nav-link px-0 text-info" asp-area="Admin" asp-controller="Categories" asp-action="Index">
+        <h3 class="fw-bold">Administrator</h3>
+        </a>
+        </nav>
+        <!-- Navbar -->
+        <nav id="sidebarMenu" class="collapse d-md-block bg-white">
+        <div class="position-sticky">
+        <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Categories" asp-action="Index">Category management</a>
+        <a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Suppliers" asp-action="Index">Supplier management</a>
+        <a class="list-group-item list-group-item-action py-4 bg-info text-light" asp-area="Admin" asp-controller="Products" asp-action="Index">Product management</a>
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" onsubmit="return confirm('Are you sure to log out?')">
+        <button type="submit" class="list-group-item list-group-item-action py-4 bg-info text-light">Logout</button>
+        </form>
+        </div>
+        </div>
+        </nav>
+        </div>
 
-            <script>
-                function deleteConfirm() {
-                    if (confirm("Are you sure to delete!")) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            </script>
+        <script>
+        function deleteConfirm() {
+        if (confirm("Are you sure to delete!")) {
+        return true;
+        } else {
+        return false;
+        }
+        }
+        </script>
 
-            <main class="col-lg-10 col-md-9 col-12">
-                @RenderBody()
-            </main>
+        <main class="col-lg-10 col-md-9 col-12">
+        @RenderBody()
+        </main>
         </section> *@
         <div class="container-fluid">
             <div class="row flex-nowrap">
@@ -89,9 +89,9 @@
                         </a>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                             @* <li class="nav-item">
-                                <a asp-controller="Categories" asp-action="Index" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
-                                </a>
+                            <a asp-controller="Categories" asp-action="Index" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span>
+                            </a>
                             </li> *@
                             <li class="nav-item">
                                 <a asp-controller="Categories" asp-action="Index" class="nav-link">
@@ -110,19 +110,25 @@
                             </li>
                         </ul>
                         <hr>
-                        <div class="dropdown pb-4">
+                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button id="logout" type="submit" class="btn btn-outline-secondary">Logout</button>
+                        </form>
+                        <div class="dropdown pb-4 mt-2">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                <span class="d-none d-sm-inline mx-1">loser</span>
+                                <span class="d-none d-sm-inline mx-1">Admin</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                <li><a class="dropdown-item" href="#">New project...</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li>
+                                @* <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                <li>
+                                    <form id="logoutForm" class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <input type="submit" value="Logout" class="btn btn-secondary btn-sm" />
+                                    </form>
+                                </li> *@
                             </ul>
                         </div>
                     </div>
