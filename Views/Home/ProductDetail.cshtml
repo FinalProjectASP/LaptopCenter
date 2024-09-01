@@ -10,7 +10,7 @@
         {
                 <div class="col-md-4 col-12 product-left">
                     <div class="product-image">
-                        <img src="~/img/products/@ViewBag.Product.ProductImage" alt="Podcast Title">
+                        <img src="~/images/Product/@ViewBag.Product.ProductImage" alt="Podcast Title">
                     </div>
                 </div>
                 <div class="col-md-8 col-12 product-right ps-md-5">
@@ -270,14 +270,14 @@
 
                                         <div class="logo-cart">
                                             <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
-                                                <img src="~/img/suppliers/@product.Supplier.LogoUrl" alt="logo">
+                                                <img src="~/images/Supplier/@product.Supplier.LogoUrl" alt="logo">
                                                 <i class='bx bx-shopping-bag'></i>
                                             </a>
 
                                         </div>
                                         <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
                                             <div class="main-images">
-                                                <img id="blue" class="blue active" src="~/img/products/@product.ProductImage" alt="blue">
+                                                <img id="blue" class="blue active" src="~/images/Product/@product.ProductImage" alt="blue">
                                             </div>
                                         </a>
                                         @{

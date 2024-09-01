@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using LaptopCenter.Data;
 using LaptopCenter.Models;
 using Microsoft.AspNetCore.Authorization;
+using LaptopCenter.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace LaptopCenter.Areas.Admin.Controllers
 {
@@ -16,10 +18,12 @@ namespace LaptopCenter.Areas.Admin.Controllers
     public class SuppliersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IFileService _fileService;
 
-        public SuppliersController(ApplicationDbContext context)
+        public SuppliersController(ApplicationDbContext context, IFileService fileService)
         {
             _context = context;
+            _fileService = fileService;
         }
 
         // GET: Suppliers
@@ -41,14 +45,20 @@ namespace LaptopCenter.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SupplierId,SupplierName,LogoUrl")] Supplier supplier)
+        public async Task<IActionResult> Create([FromForm] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(supplier);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var result = _fileService.SaveImage(supplier.LogoFile, Constraints.EFileType.Supplier);
+                if (result.Item1 == 1)
+                {
+                    supplier.LogoUrl = result.Item2;
+                    _context.Add(supplier);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+
             return View(supplier);
         }
 
@@ -73,7 +83,7 @@ namespace LaptopCenter.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SupplierId,SupplierName,LogoUrl")] Supplier supplier)
+        public async Task<IActionResult> Edit(int id, [FromForm] Supplier supplier)
         {
             if (id != supplier.SupplierId)
             {
@@ -84,6 +94,21 @@ namespace LaptopCenter.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (supplier.LogoFile != null)
+                    {
+                        var result = _fileService.SaveImage(supplier.LogoFile, Constraints.EFileType.Supplier);
+                        if (result.Item1 == 1)
+                        {
+                            var oldImage = supplier.LogoUrl;
+                            supplier.LogoUrl = result.Item2;
+
+                            if (!string.IsNullOrEmpty(oldImage))
+                            {
+                                _fileService.DeleteImage(oldImage, Constraints.EFileType.Supplier);
+                            }
+                        }
+                    }
+
                     _context.Update(supplier);
                     await _context.SaveChangesAsync();
                 }
@@ -100,6 +125,7 @@ namespace LaptopCenter.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(supplier);
         }
 

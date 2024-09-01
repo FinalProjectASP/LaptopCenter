@@ -4,42 +4,33 @@
     ViewData["Title"] = "Edit";
 }
 
-<div class="container mt-4">
-    <h1 class="mb-4">Edit Supplier</h1>
-
-    <div class="card shadow-sm">
-        <div class="card-header">
-            <h4 class="mb-0">Edit Supplier Details</h4>
-        </div>
-        <div class="card-body">
-            <form asp-action="Edit">
+<div>
+    <h1 class="text-center">Edit Supplier</h1>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Edit" class="needs-validation" novalidate enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
                 <input type="hidden" asp-for="SupplierId" />
 
-                <div class="mb-3">
-                    <label asp-for="SupplierName" class="form-label"></label>
-                    <input asp-for="SupplierName" class="form-control" />
-                    <div class="invalid-feedback">
-                        @Html.ValidationMessageFor(model => model.SupplierName)
-                    </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="SupplierName" class="form-control" placeholder="Supplier name" />
+                    <label asp-for="SupplierName"></label>
+                    <span asp-validation-for="SupplierName" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="LogoUrl" class="form-label"></label>
-                    <input asp-for="LogoUrl" class="form-control" />
-                    <div class="invalid-feedback">
-                        @Html.ValidationMessageFor(model => model.LogoUrl)
-                    </div>
+                    <label asp-for="LogoFile" class="form-label"></label>
+                    <input asp-for="LogoFile" class="form-control" type="file">
                 </div>
 
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                <input type="hidden" asp-for="LogoUrl" />
+
+                <div class=" mb-3">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
                 </div>
             </form>
-        </div>
-        <div class="card-footer">
-            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
 </div>

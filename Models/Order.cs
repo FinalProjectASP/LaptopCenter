@@ -26,5 +26,6 @@ namespace LaptopCenter.Models
         [Required]
         public EStatus Status { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
+        public virtual ICollection<Review>? Reviews { get; set; }
     }
 }

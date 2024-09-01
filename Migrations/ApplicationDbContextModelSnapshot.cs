@@ -773,7 +773,7 @@ namespace LaptopCenter.Migrations
             modelBuilder.Entity("LaptopCenter.Models.Review", b =>
                 {
                     b.HasOne("LaptopCenter.Models.Order", "Order")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -848,6 +848,8 @@ namespace LaptopCenter.Migrations
             modelBuilder.Entity("LaptopCenter.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("LaptopCenter.Models.Product", b =>

@@ -10,6 +10,7 @@ using LaptopCenter.Models;
 using LaptopCenter.DTO;
 using LaptopCenter.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using LaptopCenter.Services;
 
 namespace LaptopCenter.Areas.Admin.Controllers
 {
@@ -22,6 +23,7 @@ namespace LaptopCenter.Areas.Admin.Controllers
         private readonly ICategoryRepository _categoryRepository;
         private readonly ISupplierRepository _supplierRepository;
         private readonly ApplicationDbContext _context;
+        private readonly IFileService _fileService;
 
 
         public ProductsController(
@@ -29,7 +31,8 @@ namespace LaptopCenter.Areas.Admin.Controllers
             IConfiguration configuration,
             IProductRepository productRepository,
             ICategoryRepository categoryRepository,
-            ISupplierRepository supplierRepository
+            ISupplierRepository supplierRepository,
+            IFileService fileService
         )
         {
             _context = context;
@@ -37,6 +40,7 @@ namespace LaptopCenter.Areas.Admin.Controllers
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
             _supplierRepository = supplierRepository;
+            _fileService = fileService;
         }
 
         // GET: Products
@@ -62,14 +66,18 @@ namespace LaptopCenter.Areas.Admin.Controllers
         // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,ProductName,ShortDescription,DetailDescription,Image,IsSale,Quantity,Price,CPU,RAM,GraphicsCard,ScreenSize,WarrantyPeriod,CreateAt,SupplierId,CategoryId")] Product product)
+        public async Task<IActionResult> Create([FromForm] Product product)
         {
             if (ModelState.IsValid)
             {
-
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var result = _fileService.SaveImage(product.ImageFile, Constraints.EFileType.Product);
+                if (result.Item1 == 1)
+                {
+                    product.Image = result.Item2;
+                    _context.Add(product);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
 
             var categories = await _categoryRepository.GetCategories();
@@ -107,7 +115,7 @@ namespace LaptopCenter.Areas.Admin.Controllers
         // POST: Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ShortDescription,DetailDescription,Image,IsSale,Quantity,Price,CPU,RAM,GraphicsCard,ScreenSize,WarrantyPeriod,CreateAt,SupplierId,CategoryId")] Product product)
+        public async Task<IActionResult> Edit(int id, [FromForm] Product product)
         {
             if (id != product.ProductId)
             {
@@ -118,6 +126,21 @@ namespace LaptopCenter.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (product.ImageFile != null)
+                    {
+                        var result = _fileService.SaveImage(product.ImageFile, Constraints.EFileType.Product);
+                        if (result.Item1 == 1)
+                        {
+                            var oldImage = product.Image;
+                            product.Image = result.Item2;
+
+                            if (!string.IsNullOrEmpty(oldImage))
+                            {
+                                _fileService.DeleteImage(oldImage, Constraints.EFileType.Product);
+                            }
+                        }
+                    }
+
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }

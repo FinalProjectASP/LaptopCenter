@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaptopCenter.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240823151420_AddSampleData")]
-    partial class AddSampleData
+    [Migration("20240901150101_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,13 +83,11 @@ namespace LaptopCenter.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("SecurityStamp")
+                    b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telephone")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -778,7 +776,7 @@ namespace LaptopCenter.Migrations
             modelBuilder.Entity("LaptopCenter.Models.Review", b =>
                 {
                     b.HasOne("LaptopCenter.Models.Order", "Order")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -853,6 +851,8 @@ namespace LaptopCenter.Migrations
             modelBuilder.Entity("LaptopCenter.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("LaptopCenter.Models.Product", b =>
