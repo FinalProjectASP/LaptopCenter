@@ -143,7 +143,6 @@ namespace LaptopCenter.Repositories
                 }).ToList();
 
             return result;
-
         }
 
 
@@ -154,6 +153,61 @@ namespace LaptopCenter.Repositories
                 .ThenInclude(od => od.Product)
                 .FirstOrDefault(o => o.OrderId == orderId);
         }
-    }
 
+        public List<OrderDTO> GetAllOrder()
+        {
+            // LINQ query to fetch current orders
+            var orders = (from order in _context.Orders
+                          join orderDetail in _context.OrderDetails on order.OrderId equals orderDetail.OrderId
+                          join product in _context.Products on orderDetail.ProductId equals product.ProductId
+                          from review in _context.Reviews
+                              .Where(r => r.ProductId == product.ProductId && r.OrderId == order.OrderId)
+                              .DefaultIfEmpty()
+                          select new
+                          {
+                              Order = order,
+                              OrderDetail = new OrderDetailDTO
+                              {
+                                  ProductId = orderDetail.ProductId,
+                                  OrderId = orderDetail.OrderId,
+                                  Quantity = orderDetail.Quantity,
+                                  UnitPrice = orderDetail.UnitPrice
+                              },
+                              Product = new ProductsDTO
+                              {
+                                  ProductId = product.ProductId,
+                                  ProductName = product.ProductName,
+                                  ShortDescription = product.ShortDescription,
+                                  DetailDescription = product.DetailDescription,
+                                  Quantity = product.Quantity,
+                                  IsSale = product.IsSale,
+                                  CPU = product.CPU,
+                                  RAM = product.RAM,
+                                  GraphicsCard = product.GraphicsCard,
+                                  ScreenSize = product.ScreenSize,
+                                  WarrantyPeriod = product.WarrantyPeriod,
+                                  CreateAt = product.CreateAt,
+                                  ProductImage = product.Image,
+                                  Price = product.Price,
+                                  Category = product.Category,
+                                  Supplier = product.Supplier
+                              }
+                          }).ToList();
+
+            // Group by OrderId to assemble the final list of OrderDTOs
+            var result = orders
+                .GroupBy(o => o.Order.OrderId)
+                .Select(g => new OrderDTO
+                {
+                    Order = g.First().Order, // Assign the Order object
+                    Details = g.Select(o => new Details
+                    {
+                        Product = o.Product, // Assign the ProductDTO
+                        OrderDetail = o.OrderDetail // Assign the OrderDetailDTO
+                    }).ToList()
+                }).ToList();
+
+            return result;
+        }
+    }
 }

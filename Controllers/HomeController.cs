@@ -40,7 +40,7 @@ namespace LaptopCenter.Controllers
 
                 if (role[0] == ERole.Admin.ToString())
                 {
-                    return LocalRedirect(Url.Content("~/Admin/Categories/Index"));
+                    return LocalRedirect(Url.Content("~/Admin/Orders/Index"));
                 }
             }
 

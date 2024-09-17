@@ -125,7 +125,7 @@ namespace LaptopCenter.Areas.Identity.Pages.Account
 
                     if (role[0] == ERole.Admin.ToString())
                     {
-                        returnUrl = Url.Content("~/Admin/Categories/Index");
+                        returnUrl = Url.Content("~/Admin/Orders/Index");
                     }
 
                     return LocalRedirect(returnUrl);

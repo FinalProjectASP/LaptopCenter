@@ -25,6 +25,7 @@ namespace LaptopCenter.Models
         public decimal Total { get; set; }
         [Required]
         public EStatus Status { get; set; }
+        public virtual AppUser? User { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
         public virtual ICollection<Review>? Reviews { get; set; }
     }

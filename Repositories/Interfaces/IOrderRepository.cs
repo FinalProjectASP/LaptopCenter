@@ -9,6 +9,6 @@ namespace LaptopCenter.Repositories.Interfaces
         Order GetOrderById(int orderId);
         List<OrderDTO> GetHistoryPurchase(string userId);
         List<OrderDTO> GetCurrentOrder(string userId);
+        List<OrderDTO> GetAllOrder();
     }
-
 }
