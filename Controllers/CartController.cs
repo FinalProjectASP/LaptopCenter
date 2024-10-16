@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using LaptopCenter.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using LaptopCenter.DTO;
+using System.Net;
 
 namespace LaptopCenter.Controllers
 {
@@ -96,16 +98,20 @@ namespace LaptopCenter.Controllers
             return Json(new { success = false, message = "Cart item not found." });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CheckOut()
+        [HttpGet]
+        public IActionResult CheckOut()
         {
             string userId = _userManager.GetUserId(User);
             var cartItems = _cartRepository.GetCartItemsByUserId(userId);
-            return View(cartItems);
+
+            CheckoutDTO checkoutDTO = new CheckoutDTO();
+            checkoutDTO.CartItems = cartItems;
+
+            return View(checkoutDTO);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ProcessCheckout(string customerName, string customerPhone, string address, decimal total)
+        public IActionResult CheckOut(CheckoutDTO checkoutDTO)
         {
             // Get the current user's ID
             var userId = _userManager.GetUserId(User);
@@ -113,42 +119,47 @@ namespace LaptopCenter.Controllers
             // Retrieve cart items for the user
             List<Cart> cartItems = _cartRepository.GetCartItemsByUserId(userId);
 
-
-            if (cartItems.Any())
+            if (ModelState.IsValid)
             {
-                // Create a new order
-                var order = new Order
+                if (cartItems.Any())
                 {
-                    UserId = userId,
-                    CustomerName = customerName,
-                    CustomerPhone = customerPhone,
-                    DeleveryLocal = address,
-                    OrderDate = DateTime.Now,
-                    DeliveryDate = DateTime.Now.AddDays(5), // Example delivery date
-                    Total = total,
-                    Status = EStatus.Pending, // Assuming EStatus is an enum
-                    OrderDetails = cartItems.Select(c => new OrderDetail
+                    // Create a new order
+                    var order = new Order
                     {
-                        ProductId = c.ProductId,
-                        Quantity = c.Quantity,
-                        UnitPrice = c.Product.Price
-                    }).ToList()
-                };
+                        UserId = userId,
+                        CustomerName = checkoutDTO.CustomerName,
+                        CustomerPhone = checkoutDTO.CustomerPhone,
+                        DeleveryLocal = checkoutDTO.DeliveryAddress,
+                        OrderDate = DateTime.Now,
+                        DeliveryDate = DateTime.Now.AddDays(5), // Example delivery date
+                        Total = checkoutDTO.OrderTotal,
+                        Status = EStatus.Pending, // Assuming EStatus is an enum
+                        OrderDetails = cartItems.Select(c => new OrderDetail
+                        {
+                            ProductId = c.ProductId,
+                            Quantity = c.Quantity,
+                            UnitPrice = c.Product.Price
+                        }).ToList()
+                    };
 
-                // Save the order to the database
-                _orderRepository.AddOrder(order);
+                    // Save the order to the database
+                    _orderRepository.AddOrder(order);
 
-                // Clear the user's cart
-                _cartRepository.ClearCart(userId);
+                    // Clear the user's cart
+                    _cartRepository.ClearCart(userId);
 
-                // Redirect to a confirmation page (or display success message)
-                return RedirectToAction("Index");
+                    // Redirect to a confirmation page (or display success message)
+                    return RedirectToAction("Index");
+                }
+
+                // If the cart is empty, show an error message
+                ViewBag.ErrorMessage = "Your cart is empty!";
+
+                return View("CheckOut");
             }
 
-            // If the cart is empty, show an error message
-            ViewBag.ErrorMessage = "Your cart is empty!";
-
-            return View("CheckOut");
+            checkoutDTO.CartItems = cartItems;
+            return View(checkoutDTO);
         }
     }
 }

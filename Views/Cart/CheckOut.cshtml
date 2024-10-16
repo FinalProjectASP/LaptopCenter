@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LaptopCenter.Models.Cart>
+﻿@model LaptopCenter.DTO.CheckoutDTO
 
 @{
     ViewBag.Title = "Checkout";
@@ -33,15 +33,15 @@
                         </nav>
                     </div>
                 </div>
-                <form asp-controller="Cart" asp-action="ProcessCheckout" method="post">
+                <form asp-controller="Cart" asp-action="Checkout" method="post">
                     <div class="row d-flex mb-5">
                         <div class="col-6 ">
                             <div class="cart_title mb-5">
                                 Your Cart
-                                <small> (@Model.Count() item(s)) </small>
+                                <small> (@Model.CartItems.Count() item(s)) </small>
                             </div>
                             <div class="procces_scroll">
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.CartItems)
                                 {
                                     <div class="details shadow">
                                         <div class="details__item">
@@ -68,8 +68,8 @@
                                 <div class="card-body">
                                     <div class="d-flex gap-4">
                                         <div class="text-danger">Order Total:</div>
-                                        <input type="hidden" name="total" readonly value="@Model.Sum(x => x.Product.Price * x.Quantity)" />
-                                        <div class="fw-bold">$@Model.Sum(x => x.Product.Price * x.Quantity)</div>
+                                        <input type="hidden" asp-for="@Model.OrderTotal" readonly value="@Model.CartItems.Sum(x => x.Product.Price * x.Quantity)" />
+                                        <div class="fw-bold">$@Model.CartItems.Sum(x => x.Product.Price * x.Quantity)</div>
                                     </div>
                                 </div>
                             </div>
@@ -80,19 +80,24 @@
                                     Your Personal Information
                                 </div>
 
+                                <input type="hidden" asp-for="@Model.CartItems" />
+
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" name="customerName" id="customerName" placeholder="Full name" />
-                                    <label for="customerName">Full name</label>
+                                    <input type="text" class="form-control" asp-for="@Model.CustomerName" placeholder="Full name" />
+                                    <label asp-for="@Model.CustomerName">Full name</label>
+                                    <span asp-validation-for="@Model.CustomerName" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" name="customerPhone" id="customerPhone" placeholder="Phone number" />
-                                    <label for="customerPhone">Phone number</label>
+                                    <input type="text" class="form-control" asp-for="@Model.CustomerPhone" placeholder="Phone number" />
+                                    <label asp-for="@Model.CustomerPhone">Phone number</label>
+                                    <span asp-validation-for="@Model.CustomerPhone" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="address" id="address" style="height: 100px" placeholder="Address"></textarea>
-                                    <label for="address">Address</label>
+                                    <textarea class="form-control" asp-for="@Model.DeliveryAddress" style="height: 100px" placeholder="Address"></textarea>
+                                    <label asp-for="@Model.DeliveryAddress">Address</label>
+                                    <span asp-validation-for="@Model.DeliveryAddress" class="text-danger"></span>
                                 </div>
 
                                 <div class="cart_buttons">

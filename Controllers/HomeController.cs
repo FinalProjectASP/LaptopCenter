@@ -18,17 +18,20 @@ namespace LaptopCenter.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IProductRepository _productRepository;
         private readonly IReviewRepository _reviewRepository;
+        private readonly IContactRepository _contactRepository;
 
 
         public HomeController(
             UserManager<AppUser> userManager,
             IProductRepository productRepository,
-            IReviewRepository reviewRepository
+            IReviewRepository reviewRepository,
+            IContactRepository contactRepository
         )
         {
             _userManager = userManager;
             _productRepository = productRepository;
             _reviewRepository = reviewRepository;
+            _contactRepository = contactRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -80,9 +83,23 @@ namespace LaptopCenter.Controllers
         {
             return View();
         }
+
         public async Task<IActionResult> Contact()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Contact(Contact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactRepository.AddNewContact(contact);
+                ViewBag.Message = "Send contact successfully!";
+                return RedirectToAction(nameof(Contact));
+            }
+
+            return View(contact);
         }
     }
 }

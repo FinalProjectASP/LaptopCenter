@@ -1,7 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model LaptopCenter.Models.Contact
+
 @{
+    ViewBag.Title = "Contact";
 }
 
 <div class="container_contact">
@@ -37,29 +37,29 @@
             <span class="circle one"></span>
             <span class="circle two"></span>
 
-            <form class="form_input_contact" action="index.html" autocomplete="off">
+            <form asp-controller="Home" asp-action="Contact" class="p-3" autocomplete="off">
                 <h3 class="title">Contact us</h3>
-                <div class="input-container">
-                    <input type="text" name="name" class="input" />
-                    <label for>Username</label>
-                    <span>Username</span>
+                <div class="form-floating mb-3">
+                    <input type="text" asp-for="@Model.FullName" class="form-control" placeholder="Full name" />
+                    <label asp-for="@Model.FullName">Full name</label>
+                    <span asp-validation-for="@Model.FullName" class="text-danger"></span>
                 </div>
-                <div class="input-container">
-                    <input type="email" name="email" class="input" />
-                    <label for>Email</label>
-                    <span>Email</span>
+                <div class="form-floating mb-3">
+                    <input type="email" asp-for="@Model.Email" class="form-control" placeholder="Email" />
+                    <label asp-for="@Model.Email">Email</label>
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
                 </div>
-                <div class="input-container">
-                    <input type="tel" name="phone" class="input" />
-                    <label for>Phone</label>
-                    <span>Phone</span>
+                <div class="form-floating mb-3">
+                    <input type="tel" asp-for="@Model.PhoneNumber" class="form-control" placeholder="Phone number" />
+                    <label asp-for="@Model.PhoneNumber">Phone</label>
+                    <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
                 </div>
-                <div class="input-container textarea">
-                    <textarea name="message" class="input"></textarea>
-                    <label for>Message</label>
-                    <span>Message</span>
+                <div class="form-floating mb-3 textarea">
+                    <textarea name="message" asp-for="@Model.Message" class="form-control" placeholder="Full name"></textarea>
+                    <label asp-for="@Model.Message">Message</label>
+                    <span asp-validation-for="@Model.Message" class="text-danger"></span>
                 </div>
-                <input type="submit" value="Send" class="btn_contact" />
+                <button class="w-100 btn btn-primary" type="submit">Send</button>
             </form>
         </div>
     </div>

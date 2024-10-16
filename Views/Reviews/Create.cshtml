@@ -4,90 +4,91 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="text-center">
-    <h1>Review And rating</h1>
-    <h2>How was your experience about our product?</h2>
-</div>
-
-<form asp-controller="Reviews" asp-action="CreateReview" class="master" method="post">
-    <div class="rating-component">
-        <div class="status-msg"></div>
-        <div class="stars-box">
-            <i class="star fa fa-star" title="1 star"
-               data-message="Poor" data-value="1"></i>
-            <i class="star fa fa-star" title="2 stars"
-               data-message="Too bad" data-value="2"></i>
-            <i class="star fa fa-star" title="3 stars"
-               data-message="Average quality" data-value="3"></i>
-            <i class="star fa fa-star" title="4 stars"
-               data-message="Nice" data-value="4"></i>
-            <i class="star fa fa-star" title="5 stars"
-               data-message="very good qality" data-value="5"></i>
-        </div>
-        <div class="starrate">
-            <input asp-for="Rate" class="ratevalue" type="hidden" />
-        </div>
+<div class="pt-4">
+    <div class="text-center">
+        <h1>Review And rating</h1>
+        <h2>How was your experience about our product?</h2>
     </div>
 
-    <div class="feedback-tags">
-        <div class="tags-container" data-tag-set="1">
-            <div class="question-tag">
-                Why was your experience so bad?
+    <form asp-controller="Reviews" asp-action="CreateReview" class="master" method="post">
+        <div class="rating-component">
+            <div class="status-msg"></div>
+            <div class="stars-box">
+                <i class="star fa fa-star" title="1 star"
+                   data-message="Poor" data-value="1"></i>
+                <i class="star fa fa-star" title="2 stars"
+                   data-message="Too bad" data-value="2"></i>
+                <i class="star fa fa-star" title="3 stars"
+                   data-message="Average quality" data-value="3"></i>
+                <i class="star fa fa-star" title="4 stars"
+                   data-message="Nice" data-value="4"></i>
+                <i class="star fa fa-star" title="5 stars"
+                   data-message="very good qality" data-value="5"></i>
             </div>
-        </div>
-        <div class="tags-container" data-tag-set="2">
-            <div class="question-tag">
-                Why was your experience so bad?
-            </div>
-
-        </div>
-
-        <div class="tags-container" data-tag-set="3">
-            <div class="question-tag">
-                Why was your average rating experience ?
-            </div>
-        </div>
-        <div class="tags-container" data-tag-set="4">
-            <div class="question-tag">
-                Why was your experience good?
+            <div class="starrate">
+                <input asp-for="Rate" class="ratevalue" type="hidden" />
             </div>
         </div>
 
-        <div class="tags-container" data-tag-set="5">
-            <div class="make-compliment">
-                <div class="compliment-container">
-                    Give a compliment
-                    <i class="far fa-smile-wink"></i>
+        <div class="feedback-tags">
+            <div class="tags-container" data-tag-set="1">
+                <div class="question-tag">
+                    Why was your experience so bad?
                 </div>
             </div>
+            <div class="tags-container" data-tag-set="2">
+                <div class="question-tag">
+                    Why was your experience so bad?
+                </div>
+
+            </div>
+
+            <div class="tags-container" data-tag-set="3">
+                <div class="question-tag">
+                    Why was your average rating experience ?
+                </div>
+            </div>
+            <div class="tags-container" data-tag-set="4">
+                <div class="question-tag">
+                    Why was your experience good?
+                </div>
+            </div>
+
+            <div class="tags-container" data-tag-set="5">
+                <div class="make-compliment">
+                    <div class="compliment-container">
+                        Give a compliment
+                        <i class="far fa-smile-wink"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tags-box">
+                <textarea class="tag form-control"
+                          name="comment" asp-for="Comment"
+                          placeholder="Please enter your review"></textarea>
+
+                <input type="hidden" asp-for="ProductId"
+                       value="@ViewBag.ProductId" />
+
+                <input type="hidden" asp-for="OrderId"
+                       value="@ViewBag.OrderId" />
+            </div>
+
         </div>
 
-        <div class="tags-box">
-            <textarea class="tag form-control"
-                      name="comment" asp-for="Comment"
-                      placeholder="Please enter your review"></textarea>
-
-            <input type="hidden" asp-for="ProductId"
-                   value="@ViewBag.ProductId" />
-
-            <input type="hidden" asp-for="OrderId"
-                   value="@ViewBag.OrderId" />
+        <div class="button-box">
+            <button type="submit" class="done btn btn-warning"
+                    disabled="disabled">
+                Add review
+            </button>
         </div>
+    </form>
 
+    <div class="mt-3 text-center">
+        <a asp-area="Identity" asp-page="/Account/Manage/PurchaseHistory" class="btn btn-secondary">Back to List</a>
     </div>
-
-    <div class="button-box">
-        <button type="submit" class="done btn btn-warning"
-                disabled="disabled">
-            Add review
-        </button>
-    </div>
-</form>
-
-<div class="mt-3 text-center">
-    <a asp-area="Identity" asp-page="/Account/Manage/PurchaseHistory" class="btn btn-secondary">Back to List</a>
 </div>
-
 
 @section Scripts {
     @{

@@ -78,9 +78,7 @@
                         </div>
                         <div class="cart_buttons">
                             <a asp-action="Product" asp-controller="Home" type="button" class="btn btn-outline-secondary btn-lg">Continue Shopping</a>
-                            <form asp-action="CheckOut" asp-controller="Cart" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-dark btn-lg">Check out</button>
-                            </form>
+                            <a asp-action="CheckOut" asp-controller="Cart" type="button" class="btn btn-dark btn-lg">Check out</a>
                         </div>
                     } 
                     else

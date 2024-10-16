@@ -15,6 +15,7 @@ namespace LaptopCenter.Repositories
         {
             _context = context;
         }
+
         public async Task<IEnumerable<Category>> GetCategories()
         {
             try
