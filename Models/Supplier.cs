@@ -15,7 +15,6 @@ namespace LaptopCenter.Models
 
 
         [Display(Name = "Logo")]
-        [Required(ErrorMessage = "Logo URL is required.")]
         public string? LogoUrl{ get; set; }
 
         [NotMapped]

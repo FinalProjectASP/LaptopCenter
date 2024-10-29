@@ -489,8 +489,8 @@ ul.footer-links {
     }
 
 .product-card .main-images {
-    /* position: relative;
-        height: 210px;*/
+     /*position: relative;*/
+        height: 210px;
 }
 
     .product-card .main-images img {
