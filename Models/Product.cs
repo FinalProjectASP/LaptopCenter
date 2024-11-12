@@ -33,6 +33,10 @@ namespace LaptopCenter.Models
         public int Quantity { get; set; }
 
         [Required]
+        [Display(Name = "Sold quantity")]
+        public int SoldQuantity { get; set; }
+
+        [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 

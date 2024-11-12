@@ -326,5 +326,18 @@ namespace LaptopCenter.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public void UpdateProdct(Product product)
+        {
+            try
+            {
+                _context.Products.Update(product);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

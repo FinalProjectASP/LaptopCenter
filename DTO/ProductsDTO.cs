@@ -22,6 +22,9 @@ namespace LaptopCenter.DTO
         [Display(Name = "Quantity")]
         public int? Quantity { get; set; }
 
+        [Display(Name = "Sold Quantity")]
+        public int? SoldQuantity { get; set; }
+
         [Display(Name = "Is on Sale")]
         public bool? IsSale { get; set; }
 

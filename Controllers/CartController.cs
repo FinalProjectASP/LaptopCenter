@@ -64,9 +64,12 @@ namespace LaptopCenter.Controllers
 
             if (existingCart != null)
             {
-                // Update the quantity if the product is already in the cart
-                existingCart.Quantity += Quantity;
-                _cartRepository.UpdateCart(existingCart);
+                if (existingCart.Quantity + 1 < existingCart.Product.Quantity - existingCart.Product.SoldQuantity)
+                {
+                    // Update the quantity if the product is already in the cart
+                    existingCart.Quantity += Quantity;
+                    _cartRepository.UpdateCart(existingCart);
+                }
             }
             else
             {
@@ -104,14 +107,16 @@ namespace LaptopCenter.Controllers
             string userId = _userManager.GetUserId(User);
             var cartItems = _cartRepository.GetCartItemsByUserId(userId);
 
-            CheckoutDTO checkoutDTO = new CheckoutDTO();
-            checkoutDTO.CartItems = cartItems;
+            CheckoutDTO checkoutDTO = new CheckoutDTO
+            {
+                CartItems = cartItems
+            };
 
             return View(checkoutDTO);
         }
 
         [HttpPost]
-        public IActionResult CheckOut(CheckoutDTO checkoutDTO)
+        public async Task<IActionResult> CheckOut(CheckoutDTO checkoutDTO)
         {
             // Get the current user's ID
             var userId = _userManager.GetUserId(User);
@@ -138,7 +143,7 @@ namespace LaptopCenter.Controllers
                         {
                             ProductId = c.ProductId,
                             Quantity = c.Quantity,
-                            UnitPrice = c.Product.Price
+                            UnitPrice = c.Product.Price,
                         }).ToList()
                     };
 
@@ -147,6 +152,13 @@ namespace LaptopCenter.Controllers
 
                     // Clear the user's cart
                     _cartRepository.ClearCart(userId);
+
+                    foreach (var item in cartItems)
+                    {
+                        var product = item.Product;
+                        product.SoldQuantity += item.Quantity;
+                        _productRepository.UpdateProdct(product);
+                    }
 
                     // Redirect to a confirmation page (or display success message)
                     return RedirectToAction("Index");

@@ -47,6 +47,8 @@
                                                                 <i class="fa fa-minus" style="padding-left:9px"></i>
                                                             </a>
                                                             <input type="hidden" readonly="readonly" id="prod_id" class="prod_id" value="@item.ProductId" />
+                                                            <input type="hidden" readonly="readonly" id="prod_qty" class="prod_qty" value="@item.Product.Quantity" />
+                                                            <input type="hidden" readonly="readonly" id="sold_qty" class="sold_qty" value="@item.Product.SoldQuantity" />
                                                             <input type="text" readonly="readonly" id="qty_display" class="qty-input text-center" value="@item.Quantity" />
                                                             <a class="increment-btn">
                                                                 <i class="fa fa-plus"></i>
@@ -151,16 +153,31 @@
         $(document).ready(function () {
             $('.increment-btn').click(function (e) {
                 e.preventDefault();
+
                 var prodIdInput = $(this).closest('.product_data').find('.prod_id');
                 var qtyInput = $(this).closest('.product_data').find('.qty-input');
+                var prodQtyInput = $(this).closest('.product_data').find('.prod_qty');
+                var soldQtyInput = $(this).closest('.product_data').find('.sold_qty');
+
                 var quantity = parseInt(qtyInput.val());
                 var prodId = parseInt(prodIdInput.val());
+                var prodQty = parseInt(prodQtyInput.val());
+                var soldQty = parseInt(soldQtyInput.val());
 
-                if (quantity < 10) { // Adjust max limit as needed
+                if (quantity < prodQty - soldQty) { // Adjust max limit as needed
                     quantity++;
                     qtyInput.val(quantity);
 
                     updateCartQuantity(prodId, quantity);
+                } 
+                else
+                {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Warning!',
+                        text: "The number of products has reached the limit.",
+                        showConfirmButton: true
+                    });
                 }
             });
 

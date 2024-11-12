@@ -11,5 +11,6 @@ namespace LaptopCenter.Repositories.Interfaces
         Task<IEnumerable<ProductsDTO>> GetLatestProducts();
         Task<IEnumerable<ProductsDTO>> GetSuggestProducts(string supplierName);
         string SaveProduct(Product product);
+        void UpdateProdct(Product product);
     }
 }

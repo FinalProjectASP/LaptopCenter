@@ -18,12 +18,12 @@ namespace LaptopCenter.Repositories
 
         public List<Cart> GetCartItemsByUserId(string userId)
         {
-            return _context.Carts.Where(c => c.UserId == userId).Include(c => c.Product).ToList();
+            return _context.Carts.Include(c => c.Product).Where(c => c.UserId == userId).ToList();
         }
 
         public Cart GetCartByUserAndProduct(string userId, int productId)
         {
-            return _context.Carts.FirstOrDefault(c => c.UserId == userId && c.ProductId == productId);
+            return _context.Carts.Include(c => c.Product).FirstOrDefault(c => c.UserId == userId && c.ProductId == productId);
         }
 
         public void AddToCart(Cart cart)
