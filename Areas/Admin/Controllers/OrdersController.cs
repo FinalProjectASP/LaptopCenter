@@ -98,6 +98,16 @@ namespace LaptopCenter.Areas.Admin.Controllers
                         throw;
                     }
                 }
+
+                if (order.Status == EStatus.Completed)
+                {
+                    TempData["Message"] = "Order status #" + order.OrderId + " has changed to " + order.Status.ToString() + ". Confirm paid order";
+                }
+                else
+                {
+                    TempData["Message"] = "Order status #" + order.OrderId + " has changed to " + order.Status.ToString();
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(order);
