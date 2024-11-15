@@ -179,7 +179,7 @@ namespace LaptopCenter.Repository
                 {
                     var products = await productsQuery
                         .GroupBy(
-                            psr => new { psr.Product.ProductId, psr.Product.ProductName, psr.Product.ShortDescription, psr.Product.Image, psr.Product.Price, psr.Supplier.LogoUrl, psr.Product.DetailDescription, psr.Product.Quantity, psr.Product.IsSale, psr.Product.CPU, psr.Product.RAM, psr.Product.GraphicsCard, psr.Product.ScreenSize, psr.Product.WarrantyPeriod, psr.Product.CreateAt, CategoryName = psr.Product.Category.CategoryName, SupplierName = psr.Supplier.SupplierName },
+                            psr => new { psr.Product.ProductId, psr.Product.ProductName, psr.Product.ShortDescription, psr.Product.Image, psr.Product.Price, psr.Supplier.LogoUrl, psr.Product.DetailDescription, psr.Product.Quantity, psr.Product.SoldQuantity, psr.Product.IsSale, psr.Product.CPU, psr.Product.RAM, psr.Product.GraphicsCard, psr.Product.ScreenSize, psr.Product.WarrantyPeriod, psr.Product.CreateAt, CategoryName = psr.Product.Category.CategoryName, SupplierName = psr.Supplier.SupplierName },
                             psr => psr.Review,
                             (key, reviews) => new ProductsDTO
                             {
@@ -188,6 +188,7 @@ namespace LaptopCenter.Repository
                                 ShortDescription = key.ShortDescription,
                                 DetailDescription = key.DetailDescription,
                                 Quantity = key.Quantity,
+                                SoldQuantity = key.SoldQuantity,
                                 IsSale = key.IsSale,
                                 CPU = key.CPU,
                                 RAM = key.RAM,

@@ -17,6 +17,7 @@
                 <th>@Html.DisplayNameFor(model => model.ProductName)</th>
                 <th>@Html.DisplayNameFor(model => model.ProductImage)</th>
                 <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+                <th>@Html.DisplayNameFor(model => model.SoldQuantity)</th>
                 <th>@Html.DisplayNameFor(model => model.Price)</th>
                 <th>@Html.DisplayNameFor(model => model.CPU)</th>
                 <th>@Html.DisplayNameFor(model => model.RAM)</th>
@@ -37,6 +38,7 @@
                         <img src="~/images/Product/@item.ProductImage" style="width: 100px" class="rounded img-thumbnail" alt="...">
                     </td>
                     <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SoldQuantity)</td>
                     <td>$@Html.DisplayFor(modelItem => item.Price)</td>
                     <td>@Html.DisplayFor(modelItem => item.CPU)</td>
                     <td>@Html.DisplayFor(modelItem => item.RAM)</td>
