@@ -114,7 +114,7 @@
                     {
                         <div class="col-6 col-md-3 pb-4">
                             <div class="product-card">
-                                <form asp-action="AddToCart" method="post">
+                                <form asp-controller="Cart" asp-action="AddToCart" method="post">
                                     <input type="hidden" name="ProductId" value="@product.ProductId" />
                                     <input type="hidden" name="Quantity" value="1" />
 
