@@ -1,0 +1,40 @@
+﻿@model LaptopCenter.Models.Review
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="see_detail_review">
+    <h1>See detailed review product:</h1
+    <h2 class="mb-5">@Html.DisplayFor(model => model.Product.ProductName)</h2>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.ProductId)
+        </dd>
+    </dl>
+    <div>
+        <a asp-action="Profile" asp-controller="Home">Back to List</a>
+    </div>
+</div>

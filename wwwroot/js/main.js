@@ -1,4 +1,25 @@
 $(document).ready(function () {
+    //Contact
+    const inputs = document.querySelectorAll(".input");
+
+    function focusFunc() {
+        let parent = this.parentNode;
+        parent.classList.add("focus");
+    }
+
+    function blurFunc() {
+        let parent = this.parentNode;
+        if (this.value == "") {
+            parent.classList.remove("focus");
+        }
+    }
+
+    inputs.forEach((input) => {
+        input.addEventListener("focus", focusFunc);
+        input.addEventListener("blur", blurFunc);
+    });
+
+
     // Spinner
     var spinner = function () {
         setTimeout(function () {
@@ -88,32 +109,5 @@ $(document).ready(function () {
     $('.back-to-top').click(function () {
         $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
-    });
-});
-
-const loginBtn = document.getElementById('login');
-const signupBtn = document.getElementById('signup');
-
-loginBtn.addEventListener('click', (e) => {
-    let parent = e.target.parentNode.parentNode;
-    Array.from(e.target.parentNode.parentNode.classList).find((element) => {
-        if (element !== "slide-up") {
-            parent.classList.add('slide-up')
-        } else {
-            signupBtn.parentNode.classList.add('slide-up')
-            parent.classList.remove('slide-up')
-        }
-    });
-});
-
-signupBtn.addEventListener('click', (e) => {
-    let parent = e.target.parentNode;
-    Array.from(e.target.parentNode.classList).find((element) => {
-        if (element !== "slide-up") {
-            parent.classList.add('slide-up')
-        } else {
-            loginBtn.parentNode.parentNode.classList.add('slide-up')
-            parent.classList.remove('slide-up')
-        }
     });
 });

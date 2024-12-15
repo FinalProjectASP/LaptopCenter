@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LaptopCenter.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div>
+    <h1 class="text-center">Categories List</h1>
+
+    <p class="text-end">
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th class="w-25 text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,66 @@
+﻿@model LaptopCenter.Models.Contact
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="container_contact">
+    <span class="big-circle"></span>
+    <img src="img/shape.png" class="square" alt />
+    <div class="form_contact">
+        <div class="contact-info">
+            <h3 class="title">Let's get in touch</h3>
+            <p class="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Saepe
+                dolorum adipisci recusandae praesentium dicta!
+            </p>
+
+            <div class="info">
+                <div class="information">
+                    <i class="fas fa-map-marker-alt"></i> &nbsp &nbsp
+
+                    <p>92 Cherry Drive Uniondale, NY 11553</p>
+                </div>
+                <div class="information">
+                    <i class="fas fa-envelope"></i> &nbsp &nbsp
+                    <p>lorem@ipsum.com</p>
+                </div>
+                <div class="information">
+                    <i class="fas fa-phone"></i>&nbsp&nbsp
+                    <p>123-456-789</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <span class="circle one"></span>
+            <span class="circle two"></span>
+
+            <form asp-controller="Home" asp-action="Contact" class="p-3" autocomplete="off">
+                <h3 class="title">Contact us</h3>
+                <div class="form-floating mb-3">
+                    <input type="text" asp-for="@Model.FullName" class="form-control" placeholder="Full name" />
+                    <label asp-for="@Model.FullName">Full name</label>
+                    <span asp-validation-for="@Model.FullName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" asp-for="@Model.Email" class="form-control" placeholder="Email" />
+                    <label asp-for="@Model.Email">Email</label>
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="tel" asp-for="@Model.PhoneNumber" class="form-control" placeholder="Phone number" />
+                    <label asp-for="@Model.PhoneNumber">Phone</label>
+                    <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3 textarea">
+                    <textarea name="message" asp-for="@Model.Message" class="form-control" placeholder="Full name"></textarea>
+                    <label asp-for="@Model.Message">Message</label>
+                    <span asp-validation-for="@Model.Message" class="text-danger"></span>
+                </div>
+                <button class="w-100 btn btn-primary" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+</div>

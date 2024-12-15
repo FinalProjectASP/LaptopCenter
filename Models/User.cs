@@ -1,14 +1,11 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LaptopCenter.Models
 {
-    public class User
+    public class AppUser : IdentityUser
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [StringLength(100, ErrorMessage = "Full Name cannot exceed 100 characters.")]
         public string FullName { get; set; }
 
@@ -17,14 +14,10 @@ namespace LaptopCenter.Models
         [StringLength(250, ErrorMessage = "Address cannot exceed 250 characters.")]
         public string Address { get; set; }
 
-        [Phone(ErrorMessage = "Invalid phone number format.")]
-        [StringLength(15, MinimumLength = 10, ErrorMessage = "Telephone number must be 10 digits.")]
-        public string Telephone { get; set; }
+        public string? ProfilePicture { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Invalid date format. Please use YYYY-MM-DD.")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateOnly Birthday { get; set; }
-
+        public DateTime Birthday { get; set; }
     }
-
 }

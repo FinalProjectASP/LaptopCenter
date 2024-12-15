@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LaptopCenter.Constraints;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LaptopCenter.Models
@@ -7,6 +8,8 @@ namespace LaptopCenter.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
+        [Required]
+        public DateTime OrderDate { get; set; }
         [Required]
         public DateTime DeliveryDate { get; set; }
         [Required]
@@ -18,9 +21,12 @@ namespace LaptopCenter.Models
         [Required]
         public string CustomerPhone { get; set; }
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Total { get; set; }
         [Required]
-        public Boolean IsConfirm { get; set; }
+        public EStatus Status { get; set; }
+        public virtual AppUser? User { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
+        public virtual ICollection<Review>? Reviews { get; set; }
     }
 }

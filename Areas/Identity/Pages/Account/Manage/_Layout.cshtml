@@ -1,0 +1,63 @@
+﻿@inject UserManager<AppUser> _userManager
+@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+
+    AppUser user = await _userManager.GetUserAsync(User);
+    string fullName = user.FullName;
+    string phoneNumber = user.PhoneNumber;
+    string address = user.Address;
+    string avatar = user.ProfilePicture;
+}
+
+<section class="my-5">
+    <div class="container profile mt-0">
+        <div class="main-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                @{
+                                    if (!string.IsNullOrEmpty(avatar))
+                                    {
+                                        <img src="~/images/Profile/@avatar" alt="Profile" class="rounded-circle p-1 bg-warning" width="110">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/Profile/default-avt.jpg" alt="Profile" class="rounded-circle p-1 bg-warning" width="110">
+                                    }
+                                }
+                                <div class="mt-3">
+                                    <h4>@fullName</h4>
+                                    <p class="text-secondary mb-1">@phoneNumber</p>
+                                    <p class="text-muted font-size-sm">@address</p>
+                                </div>
+
+                                <div class="cart_buttons">
+                                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button id="logout" type="submit" class="btn btn-outline-secondary btn-lg">Logout</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <partial name="_ManageNav" />
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

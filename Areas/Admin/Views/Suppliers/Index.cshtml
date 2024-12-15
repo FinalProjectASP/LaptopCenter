@@ -1,0 +1,40 @@
+﻿@model IEnumerable<LaptopCenter.Models.Supplier>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div>
+    <h1 class="text-center">Suppliers List</h1>
+
+    <p class="text-end">
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SupplierName)</th>
+                <th>@Html.DisplayNameFor(model => model.LogoUrl)</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SupplierName)
+                    </td>
+                    <td>
+                        <img src="~/images/Supplier/@item.LogoUrl" style="width: 100px" class="rounded img-thumbnail" alt="...">
+                    </td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@item.SupplierId" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.SupplierId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using LaptopCenter.Models
+
+@inject SignInManager<AppUser> _signInManager
+@inject UserManager<AppUser> _userManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+	AppUser user = await _userManager.GetUserAsync(User);
+	string avatar = user.ProfilePicture;
+
+	<div class="d-flex gap-2">
+		<div class="text-center">
+			<a asp-area="Identity" asp-page="/Account/Manage/Index">
+				@{
+					if (!string.IsNullOrEmpty(avatar))
+					{
+						<img src="~/images/Profile/@avatar" alt="Profile" style="width: 70px;" class="img-fluid rounded-circle p-2">
+					}
+					else
+					{
+						<img src="~/images/Profile/default-avt.jpg" alt="Profile" style="width: 70px;" class="img-fluid rounded-circle p-2">
+					}
+				}
+			</a>
+		</div>
+
+		<!-- Button cart -->
+		<div class="d-flex align-items-center justify-content-center">
+			<a asp-controller="Cart" asp-action="Index" class="btn-cart">
+				<i class="fa fa-shopping-cart size-cart" aria-hidden="true"></i>
+				<div class="arrow-wrapper">
+					<div class="arrow"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+}
+else
+{
+	<div class="d-flex gap-2">
+		<button class="btn btn-outline-light">
+			<a id="register" asp-area="Identity" asp-page="/Account/Register" class="text-reset">Register</a>
+		</button>
+		<button class="btn btn-secondary">
+			<a id="login" asp-area="Identity" asp-page="/Account/Login" class="text-reset">Login</a>
+		</button>
+	</div>
+}

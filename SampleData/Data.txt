@@ -1,0 +1,45 @@
+﻿-- Insert sample products
+INSERT INTO Products (ProductName, ShortDescription, DetailDescription, Image, IsSale, Quantity, Processor, RAM, Storage, ScreenSize, WarrantyPeriod, CategoryId, SupplierId)
+VALUES 
+('Samsung Galaxy S21', 'Latest Samsung smartphone', 'Full details about Samsung Galaxy S21', 'https://example.com/images/galaxy_s21.jpg', 1, 50, 'Exynos 2100', '8GB', '128GB', '6.2 inches', '2 years', 3, 1),
+('Apple MacBook Pro', 'High-performance laptop', 'Full details about Apple MacBook Pro', 'https://example.com/images/macbook_pro.jpg', 1, 30, 'M1', '16GB', '512GB', '13 inches', '1 year', 2, 2),
+('Dell XPS 13', 'Compact and powerful laptop', 'Full details about Dell XPS 13', 'https://example.com/images/xps_13.jpg', 0, 20, 'Intel i7', '16GB', '1TB', '13.4 inches', '1 year', 2, 3),
+('HP Spectre x360', 'Convertible laptop', 'Full details about HP Spectre x360', 'https://example.com/images/spectre_x360.jpg', 1, 25, 'Intel i7', '16GB', '1TB', '13.3 inches', '1 year', 2, 4),
+('Lenovo ThinkPad X1 Carbon', 'Business laptop', 'Full details about Lenovo ThinkPad X1 Carbon', 'https://example.com/images/thinkpad_x1_carbon.jpg', 1, 15, 'Intel i7', '16GB', '512GB', '14 inches', '3 years', 2, 5),
+('Samsung Galaxy Tab S7', 'High-end tablet', 'Full details about Samsung Galaxy Tab S7', 'https://example.com/images/galaxy_tab_s7.jpg', 0, 40, 'Snapdragon 865+', '6GB', '128GB', '11 inches', '1 year', 1, 1),
+('Apple iPhone 13', 'Latest Apple smartphone', 'Full details about Apple iPhone 13', 'https://example.com/images/iphone_13.jpg', 1, 100, 'A15 Bionic', '4GB', '128GB', '6.1 inches', '1 year', 3, 2),
+('Dell Inspiron 15', 'Affordable laptop', 'Full details about Dell Inspiron 15', 'https://example.com/images/inspiron_15.jpg', 0, 10, 'Intel i5', '8GB', '256GB', '15.6 inches', '1 year', 2, 3),
+('HP Envy 13', 'Portable laptop', 'Full details about HP Envy 13', 'https://example.com/images/envy_13.jpg', 1, 35, 'Intel i7', '16GB', '512GB', '13.3 inches', '1 year', 2, 4),
+('Lenovo Yoga 7i', 'Convertible laptop', 'Full details about Lenovo Yoga 7i', 'https://example.com/images/yoga_7i.jpg', 1, 20, 'Intel i5', '8GB', '256GB', '14 inches', '1 year', 2, 5);
+
+
+-- Insert sample suppliers
+INSERT INTO Suppliers (SupplierName, LogoUrl)
+VALUES 
+('Samsung', 'https://example.com/logos/samsung.jpg'),
+('Apple', 'https://example.com/logos/apple.jpg'),
+('Dell', 'https://example.com/logos/dell.jpg'),
+('HP', 'https://example.com/logos/hp.jpg'),
+('Lenovo', 'https://example.com/logos/lenovo.jpg');
+
+
+INSERT INTO Categories (CategoryName)
+VALUES
+('Electronics'),
+('Computers'),
+('Smartphones');
+
+
+
+Select p.ProductId, p.ProductName, p.ShortDescription, p.Image as 'ProductImage', p.Price,
+s.LogoUrl, AVG(r.Rate) as 'Rate'
+from Products p
+join Suppliers s
+on s.SupplierId = p.SupplierId
+
+join Reviews r
+on r.ProductId = p.ProductId
+
+where p.IsSale = 1
+group by p.ProductId, p.ProductName, p.ShortDescription, p.Image, p.Price,
+s.LogoUrl

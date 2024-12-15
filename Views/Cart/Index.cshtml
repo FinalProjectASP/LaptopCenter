@@ -1,0 +1,232 @@
+﻿@model IEnumerable<LaptopCenter.Models.Cart>
+@{
+    ViewBag.Title = "Cart";
+}
+
+<div class="cart_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 offset-lg-1 ms-2">
+                <div class="container">
+                    @if (@Model.Count() > 0)
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    Shopping Cart <small> (@Model.Count() item(s) in your cart) </small>
+                                </h2>
+                                <div class="cart-text procces_scroll">
+                                    <ul class="list-group list-group-flush">
+                                        @foreach (var item in Model)
+                                        {
+                                            <li class="list-group-item" data-product-id="@item.ProductId">
+                                                <div class="cart_item_image">
+                                                    <img src="~/images/Product/@item.Product.Image" alt="Product Image">
+                                                </div>
+                                                <div class="row">
+                                                    @{
+                                                        int maxNameLength = 30; // Đặt độ dài tối đa cho tên sản phẩm
+
+                                                        string truncatedName = item.Product.ProductName.Length > maxNameLength
+                                                        ? item.Product.ProductName.Substring(0, maxNameLength) + "..."
+                                                        : item.Product.ProductName;
+                                                    }
+
+                                                    <div class="cart_item_name col-3">
+                                                        <div class="cart_item_title">Name</div>
+                                                        <div class="cart_item_text cart_name">@truncatedName</div>
+                                                    </div>
+                                                    <div class="cart_item_price col-3">
+                                                        <div class="cart_item_title">Price</div>
+                                                        <div class="cart_item_text cart_price">$@item.Product.Price</div>
+                                                    </div>
+                                                    <div class="cart_item_quantity col-3">
+                                                        <div class="cart_item_title" id="cart_item_title">Quantity</div>
+                                                        <div class="d-flex flex-row align-self-center product_data" id="qty_select">
+                                                            <a class="decrement-btn">
+                                                                <i class="fa fa-minus" style="padding-left:9px"></i>
+                                                            </a>
+                                                            <input type="hidden" readonly="readonly" id="prod_id" class="prod_id" value="@item.ProductId" />
+                                                            <input type="hidden" readonly="readonly" id="prod_qty" class="prod_qty" value="@item.Product.Quantity" />
+                                                            <input type="hidden" readonly="readonly" id="sold_qty" class="sold_qty" value="@item.Product.SoldQuantity" />
+                                                            <input type="text" readonly="readonly" id="qty_display" class="qty-input text-center" value="@item.Quantity" />
+                                                            <a class="increment-btn">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cart_item_color col-3">
+                                                        <button class="noselect" onclick="handleRemoveCart(@item.ProductId)">
+                                                            <span class='text'>Remove</span>
+                                                            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" /></svg></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="d-flex gap-4">
+                                    <div>Order Total:</div>
+                                    <div class="fw-bold">
+                                        $@Model.Sum(x => x.Product.Price * x.Quantity)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart_buttons">
+                            <a asp-action="Product" asp-controller="Home" type="button" class="btn btn-outline-secondary btn-lg">Continue Shopping</a>
+                            <a asp-action="CheckOut" asp-controller="Cart" type="button" class="btn btn-dark btn-lg">Check out</a>
+                        </div>
+                    } 
+                    else
+                    {
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
+                                <p class="pb-3" colspan="5">No products here!</p>
+                                <a asp-action="Product" asp-controller="Home" type="button" class="btn btn-outline-secondary btn-lg">Continue Shopping</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function handleRemoveCart(productId) {
+            Swal.fire({
+                title: "Are you sure to delete?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("RemoveFromCart", "Cart")',
+                        type: 'POST',
+                        data: {
+                            productId: productId,
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted!',
+                                    text: 'Product deleted successfully.',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: response.message,
+                                    showConfirmButton: true
+                                });
+                            }
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                showConfirmButton: true
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $('.increment-btn').click(function (e) {
+                e.preventDefault();
+
+                var prodIdInput = $(this).closest('.product_data').find('.prod_id');
+                var qtyInput = $(this).closest('.product_data').find('.qty-input');
+                var prodQtyInput = $(this).closest('.product_data').find('.prod_qty');
+                var soldQtyInput = $(this).closest('.product_data').find('.sold_qty');
+
+                var quantity = parseInt(qtyInput.val());
+                var prodId = parseInt(prodIdInput.val());
+                var prodQty = parseInt(prodQtyInput.val());
+                var soldQty = parseInt(soldQtyInput.val());
+
+                if (quantity < prodQty - soldQty) { // Adjust max limit as needed
+                    quantity++;
+                    qtyInput.val(quantity);
+
+                    updateCartQuantity(prodId, quantity);
+                } 
+                else
+                {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Warning!',
+                        text: "The number of products has reached the limit.",
+                        showConfirmButton: true
+                    });
+                }
+            });
+
+            $('.decrement-btn').click(function (e) {
+                e.preventDefault();
+                var prodIdInput = $(this).closest('.product_data').find('.prod_id');
+                var qtyInput = $(this).closest('.product_data').find('.qty-input');
+                var quantity = parseInt(qtyInput.val());
+                var prodId = parseInt(prodIdInput.val());
+
+                if (quantity > 1) {
+                    quantity--;
+                    qtyInput.val(quantity);
+
+                    updateCartQuantity(prodId, quantity);
+                }
+            });
+
+            function updateCartQuantity(productId, quantity) {
+                $.ajax({
+                    url: '@Url.Action("UpdateCartQuantity", "Cart")',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        quantity: quantity
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: response.message,
+                                showConfirmButton: true
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            showConfirmButton: true
+                        });
+                    }
+                });
+            }
+        });
+
+    </script>
+}

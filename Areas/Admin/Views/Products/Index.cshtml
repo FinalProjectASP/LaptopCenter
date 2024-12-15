@@ -1,0 +1,58 @@
+﻿@model IEnumerable<LaptopCenter.DTO.ProductsDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div>
+    <h1 class="text-center">Products List</h1>
+
+    <p class="text-end">
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+                <th>@Html.DisplayNameFor(model => model.ProductImage)</th>
+                <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+                <th>@Html.DisplayNameFor(model => model.SoldQuantity)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.CPU)</th>
+                <th>@Html.DisplayNameFor(model => model.RAM)</th>
+                <th>@Html.DisplayNameFor(model => model.GraphicsCard)</th>
+                <th>@Html.DisplayNameFor(model => model.ScreenSize)</th>
+                <th>@Html.DisplayNameFor(model => model.CreateAt)</th>
+                <th>@Html.DisplayNameFor(model => model.Supplier)</th>
+                <th>@Html.DisplayNameFor(model => model.Category)</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                    <td>
+                        <img src="~/images/Product/@item.ProductImage" style="width: 100px" class="rounded img-thumbnail" alt="...">
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SoldQuantity)</td>
+                    <td>$@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CPU)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RAM)</td>
+                    <td>@Html.DisplayFor(modelItem => item.GraphicsCard)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ScreenSize)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreateAt)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Supplier.SupplierName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,70 @@
+﻿@model LaptopCenter.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div>
+    <h1 class="text-center">Edit Order</h1>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <form asp-action="Edit" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="OrderId" />
+
+                <div class="form-floating mb-3">
+                    <input asp-for="OrderDate" class="form-control" />
+                    <label asp-for="OrderDate" class="control-label"></label>
+                    <span asp-validation-for="OrderDate" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="DeliveryDate" class="form-control" />
+                    <label asp-for="DeliveryDate" class="control-label"></label>
+                    <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="DeleveryLocal" class="form-control" />
+                    <label asp-for="DeleveryLocal" class="control-label"></label>
+                    <span asp-validation-for="DeleveryLocal" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="UserId" class="form-control" readonly />
+                    <label asp-for="UserId" class="control-label"></label>
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="CustomerName" class="form-control" />
+                    <label asp-for="CustomerName" class="control-label"></label>
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="CustomerPhone" class="form-control" />
+                    <label asp-for="CustomerPhone" class="control-label"></label>
+                    <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Total" class="form-control" />
+                    <label asp-for="Total" class="control-label"></label>
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <select asp-for="Status" class="form-control" asp-items="ViewBag.StatusList"></select>
+                    <label asp-for="Status" class="control-label"></label>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

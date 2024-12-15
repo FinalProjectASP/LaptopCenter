@@ -1,270 +1,217 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="mt-5 pt-4">
-<!-- Carousel Start -->
-    <div id="carouselExampleCaptions" class="carousel slide p-0 mb-0" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="~/img/backgrounds/background-1.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="~/img/backgrounds/background-2.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="~/img/backgrounds/background-3.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
 
+<!-- Carousel Start -->
+<div id="carouselExampleCaptions" class="carousel slide p-0 mb-0" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/img/backgrounds/background-1.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/backgrounds/background-2.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/backgrounds/background-3.jpg" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 <!-- Carousel End -->
 
-    <div class="container">
-        <h2 class="product-title pt-5">New products</h2>
-        <div class="wrapper m-auto">
-            <div class="card">
-                <img src="~/img/products/laptop-accer.png" alt="" class="product_img">
-                <div class="accordion-container">
-                    <div class="accordion-item">
-                        <a href="#" class="accordion-header">Laptop Acer</a>
-                        <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, dui ac maximus tempus, justo augue semper ipsum, et luctus sapien elit in tortor. Mauris et purus erat.</p>
+<div class="container">
+    <h2 class="product-title pt-5">New products</h2>
+    <div class="wrapper m-auto">
+        @if (ViewBag.LatestProducts != null && ViewBag.LatestProducts.Count > 0)
+        {
+            foreach (var product in ViewBag.LatestProducts)
+            {
+                <div class="card card-custom">
+                     <img src="~/images/Product/@product.ProductImage" alt="" class="product_img">
+
+                    @{
+                        int maxNameLength = 50; // Set the maximum length for the product name
+                        int maxDescriptionLength = 100; // Set the maximum length for the short description
+
+                        string truncatedName = product.ProductName.Length > maxNameLength
+                        ? product.ProductName.Substring(0, maxNameLength) + "..."
+                        : product.ProductName;
+
+                        string truncatedDescription = product.ShortDescription.Length > maxDescriptionLength
+                        ? product.ShortDescription.Substring(0, maxDescriptionLength) + "..."
+                        : product.ShortDescription;
+                    }
+
+                    <div class="last_product mt-5">
+                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                            <span class="last_product_name">@truncatedName</span>
+                            <p class="last_product_description">@truncatedDescription</p>
+                        </a>
+                    </div>
+                    <div class="accordion-container">
+                        <div class="card-body pt-0">
+                            <h4 class="Specification-title mb-0">Specifications</h4>
+                            <hr class="hr-1">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="card-name" class="small-text text-muted mb-1">RAM</label>
+                                    <input type="text" class="form-control form-control-sm" name="card-name" id="card-name" aria-describedby="helpId" readonly placeholder="8 GB">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="card-number" class="small-text text-muted mb-1">CPU</label>
+                                    <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Core i3">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="card-number" class="small-text text-muted mb-1">Graphics Card</label>
+                                    <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="Intel UHD Graphics">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="card-number" class="small-text text-muted mb-1">ScreenSize</label>
+                                    <input type="text" class="form-control form-control-sm" name="card-number" id="card-number" aria-describedby="helpId" readonly placeholder="16.0 inch">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons-wrapper">
+                            <div><a class="click-btn btn-style1" asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">See detail</a></div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+        }
+        else
+        {
             <div class="card">
-                <img src="~/img/products/laptop-hp.jpg" alt="" class="product_img">
-                <div class="accordion-container">
-                    <div class="accordion-item">
-                        <a href="#" class="accordion-header">Laptop HP</a>
-                        <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, dui ac maximus tempus, justo augue semper ipsum, et luctus sapien elit in tortor. Mauris et purus erat.</p>
-                        </div>
-                    </div>
-                </div>
+               <div class="card-body text-center">
+                    <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
+                    <p class="pb-3" colspan="5">No products here!</p>
+               </div>
             </div>
-            <div class="card">
-                <img src="~/img/products/laptop-microsoft.png" alt="" class="product_img">
-                <div class="accordion-container">
-                    <div class="accordion-item">
-                        <a href="#" class="accordion-header">Laptop Microsoft</a>
-                        <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, dui ac maximus tempus, justo augue semper ipsum, et luctus sapien elit in tortor. Mauris et purus erat.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="~/img/products/laptop-msi.jpg" alt="" class="product_img">
-                <div class="accordion-container">
-                    <div class="accordion-item">
-                        <a href="#" class="accordion-header">Laptop MSI</a>
-                        <div class="accordion-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, dui ac maximus tempus, justo augue semper ipsum, et luctus sapien elit in tortor. Mauris et purus erat.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
     </div>
+</div>
 
 
-    <div class="container-xl mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="product-title"><b>Best Salers</b></h2>
-                <div class="row">
-                    <div class="col-3">
-                        <div class="product-card">
-                            <div class="logo-cart">
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <img src="https://fadzrinmadu.github.io/hosted-assets/animated-product-card-using-html-css-and-javascript/logo.jpg" alt="logo">
-                                    <i class='bx bx-shopping-bag'></i>
-                                </a>
+<div class="container-xl mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="product-title"><b>Best Salers</b></h2>
+            <div class="row">
+                @if (ViewBag.TopSellingProducts != null && ViewBag.TopSellingProducts.Count > 0)
+                {
+                    foreach (var product in ViewBag.TopSellingProducts)
+                    {
+                        <div class="col-6 col-md-3 pb-4">
+                            <div class="product-card">
+                                <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                                    <input type="hidden" name="ProductId" value="@product.ProductId" />
+                                    <input type="hidden" name="Quantity" value="1" />
 
-                            </div>
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <div class="main-images">
-                                    <img id="blue" class="blue active" src="~/img/products/laptop-accer.png" alt="blue">
-                                </div>
-                            </a>
+                                    <div class="logo-cart">
+                                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                            <img src="~/images/Supplier/@product.Supplier.LogoUrl" alt="logo">
+                                            <i class='bx bx-shopping-bag'></i>
+                                        </a>
 
-                            <div class="shoe-details">
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                    <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                </a>
-
-                            </div>
-                            <div class="color-price">
-                                <div class="color-option">
-                                    <span class="color">Rate:</span>
-                                    <div class="stars">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
                                     </div>
-                                </div>
-                                <div class="price">
-                                    <span class="price_num">$09.00</span>
-                                    <span class="price_letter">Nine dollar only</span>
-                                </div>
-                            </div>
-                            <div class="button">
-                                <div class="button-layer"></div>
-                                <button>Add To Cart</button>
+                                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                        <div class="main-images">
+                                            <img id="blue" class="blue active" src="~/images/Product/@product.ProductImage" alt="blue">
+                                        </div>
+                                    </a>
+                                    @{
+                                        int maxNameLength = 20; // Set the maximum length for the product name
+                                        int maxDescriptionLength = 50; // Set the maximum length for the short description
+
+                                        string truncatedName = product.ProductName.Length > maxNameLength
+                                        ? product.ProductName.Substring(0, maxNameLength) + "..."
+                                        : product.ProductName;
+
+                                        string truncatedDescription = product.ShortDescription.Length > maxDescriptionLength
+                                        ? product.ShortDescription.Substring(0, maxDescriptionLength) + "..."
+                                        : product.ShortDescription;
+                                    }
+
+                                    <div class="shoe-details">
+                                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                            <span class="shoe_name">@truncatedName</span>
+                                            <p class="shortdescription">@truncatedDescription</p>
+                                        </a>
+                                    </div>
+
+                                    <div class="color-price">
+                                        <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@product.ProductId">
+                                            <div class="color-option">
+                                                <span class="color">Rate: </span>
+                                                <div class="stars">
+                                                    <div class="Rating__Container-cmor0f-0 dlqGRR">
+                                                        @for (int i = 0; i < 5; i++)
+                                                        {
+                                                            if (i < Math.Floor(@product.AverageRate))
+                                                            {
+                                                                // Full star
+                                                                <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                    <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Filled-pkcl3w-2 HCqPk ebpkzz">
+                                                                        <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            }
+                                                            else if (i < @product.AverageRate)
+                                                            {
+                                                                // Half star
+                                                                <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-half ebpkzz " viewBox="0 0 16 16.8">
+                                                                        <path d="M5.354 5.119 7.538.792A.52.52 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.54.54 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.5.5 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.6.6 0 0 1 .085-.302.51.51 0 0 1 .37-.245zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.56.56 0 0 1 .162-.505l2.907-2.77-4.052-.576a.53.53 0 0 1-.393-.288L8.001 2.223 8 2.226z" />
+                                                                    </svg>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                // Empty star
+                                                                <div class="Box__Container-vw10v2-0 cKWSxf">
+                                                                    <svg viewBox="0 0 14 14" class="FilledSvg-pkcl3w-0 FilledSvg__Unfilled-pkcl3w-1 HCqPk krjrmM">
+                                                                        <path fill="none" d="M6.826 10.743l-3.28 1.724a.5.5 0 0 1-.725-.528l.627-3.65a.5.5 0 0 0-.144-.443L.65 5.26a.5.5 0 0 1 .277-.853l3.666-.533a.5.5 0 0 0 .377-.273L6.61.279a.5.5 0 0 1 .896 0L9.147 3.6a.5.5 0 0 0 .376.273l3.666.533a.5.5 0 0 1 .277.853l-2.653 2.586a.5.5 0 0 0-.144.442l.627 3.651a.5.5 0 0 1-.726.528l-3.279-1.724a.5.5 0 0 0-.465 0z"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-dark mt-2">
+                                                <h4 class="">Price: $@product.Price</h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="button">
+                                        <div class="button-layer"></div>
+                                        <button type="submit" class="btn btn-primary">Add To Cart</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="product-card">
-                            <div class="logo-cart">
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <img src="https://fadzrinmadu.github.io/hosted-assets/animated-product-card-using-html-css-and-javascript/logo.jpg" alt="logo">
-                                    <i class='bx bx-shopping-bag'></i>
-                                </a>
-
-                            </div>
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <div class="main-images">
-                                    <img id="blue" class="blue active" src="~/img/products/laptop-accer.png" alt="blue">
-                                </div>
-                            </a>
-
-                            <div class="shoe-details">
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                    <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                </a>
-
-                            </div>
-                            <div class="color-price">
-                                <div class="color-option">
-                                    <span class="color">Rate:</span>
-                                    <div class="stars">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="price">
-                                    <span class="price_num">$09.00</span>
-                                    <span class="price_letter">Nine dollar only</span>
-                                </div>
-                            </div>
-                            <div class="button">
-                                <div class="button-layer"></div>
-                                <button>Add To Cart</button>
-                            </div>
+                    }
+                }
+                else
+                {
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="~/img/empty/empty_1.gif" alt="Product GIF" class="empty_gif_product" />
+                            <p class="pb-3" colspan="5">No products here!</p>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="product-card">
-                            <div class="logo-cart">
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <img src="https://fadzrinmadu.github.io/hosted-assets/animated-product-card-using-html-css-and-javascript/logo.jpg" alt="logo">
-                                    <i class='bx bx-shopping-bag'></i>
-                                </a>
-
-                            </div>
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <div class="main-images">
-                                    <img id="blue" class="blue active" src="~/img/products/laptop-accer.png" alt="blue">
-                                </div>
-                            </a>
-
-                            <div class="shoe-details">
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                    <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                </a>
-
-                            </div>
-                            <div class="color-price">
-                                <div class="color-option">
-                                    <span class="color">Rate:</span>
-                                    <div class="stars">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="price">
-                                    <span class="price_num">$09.00</span>
-                                    <span class="price_letter">Nine dollar only</span>
-                                </div>
-                            </div>
-                            <div class="button">
-                                <div class="button-layer"></div>
-                                <button>Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="product-card">
-                            <div class="logo-cart">
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <img src="https://fadzrinmadu.github.io/hosted-assets/animated-product-card-using-html-css-and-javascript/logo.jpg" alt="logo">
-                                    <i class='bx bx-shopping-bag'></i>
-                                </a>
-
-                            </div>
-                            <a asp-controller="Home" asp-action="ProductDetail">
-                                <div class="main-images">
-                                    <img id="blue" class="blue active" src="~/img/products/laptop-accer.png" alt="blue">
-                                </div>
-                            </a>
-
-                            <div class="shoe-details">
-                                <a asp-controller="Home" asp-action="ProductDetail">
-                                    <span class="shoe_name">ADDIDAS GAZE ZX</span>
-                                    <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                </a>
-
-                            </div>
-                            <div class="color-price">
-                                <div class="color-option">
-                                    <span class="color">Rate:</span>
-                                    <div class="stars">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="price">
-                                    <span class="price_num">$09.00</span>
-                                    <span class="price_letter">Nine dollar only</span>
-                                </div>
-                            </div>
-                            <div class="button">
-                                <div class="button-layer"></div>
-                                <button>Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

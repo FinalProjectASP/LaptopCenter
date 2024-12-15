@@ -1,0 +1,40 @@
+﻿@model LaptopCenter.Models.Supplier
+
+@{
+    ViewData["Title"] = "Suppliers";
+}
+
+<div>
+    <h1 class="text-center">Create Supplier</h1>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create" class="needs-validation" novalidate enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="SupplierName" class="form-control" placeholder="Supplier name" />
+                    <label asp-for="SupplierName"></label>
+                    <span asp-validation-for="SupplierName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LogoFile" class="form-label"></label>
+                    <input asp-for="LogoFile" class="form-control" type="file">
+                </div>
+
+                <div class=" mb-3">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
